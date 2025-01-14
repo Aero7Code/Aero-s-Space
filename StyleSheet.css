@@ -73,3 +73,17 @@ footer {
     background: #333;
     color: #fff;
 }
+
+nav {
+    text-align: center;
+    margin: 10px 0;
+}
+nav a {
+    text-decoration: none;
+    margin: 0 10px;
+    color: #6c63ff;
+    font-weight: bold;
+}
+nav a:hover {
+    color: #333;
+}
