@@ -1,17 +1,22 @@
+/* General Styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
     background-color: #f4f4f9;
     color: #333;
+    line-height: 1.6;
 }
 
+/* Header Styling */
 header {
-    background: #6c63ff;
-    color: #fff;
-    padding: 1em 0;
+    background-color: #2e73d4;
+    color: white;
+    padding: 10px 20px;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 header h1 {
@@ -19,14 +24,79 @@ header h1 {
     font-size: 2.5em;
 }
 
+/* Dropdown Menu Styling */
+.dropdown {
+    position: absolute; /* Positioning the dropdown menu */
+    top: 10px;          /* Top-left corner */
+    left: 10px;
+    z-index: 1000;
+}
+
+.dropbtn {
+    background-color: #2e73d4;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #5754d8;
+}
+
+/* Main Content Styling */
 main {
     padding: 20px;
+    text-align: left;
 }
 
-section {
-    margin-bottom: 20px;
+h2 {
+    color: #4CAF50;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+/* Form Styling */
 form {
     max-width: 400px;
     margin: 0 auto;
@@ -67,118 +137,7 @@ form button:hover {
     background: #5754d8;
 }
 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background: #333;
-    color: #fff;
-}
-
-nav {
-    text-align: center;
-    margin: 10px 0;
-}
-nav a {
-    text-decoration: none;
-    margin: 0 10px;
-    color: #6c63ff;
-    font-weight: bold;
-}
-nav a:hover {
-    color: #333;
-}
-/* General Styling */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
-}
-
-header {
-    background-color: #2e73d4;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-header h1 {
-    margin: 0;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-.dropbtn {
-    background-color: #2e73d4;
-    color: white;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 5px;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-    border-bottom: 1px solid #ddd;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #2e73d4;
-}
-
-main {
-    padding: 20px;
-    text-align: left;
-}
-
-h2 {
-    color: #4CAF50;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-ul li:last-child {
-    border-bottom: none;
-}
-
+/* Footer Styling */
 footer {
     background-color: #333;
     color: white;
@@ -187,4 +146,21 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
+}
+
+/* Navigation Styling */
+nav {
+    text-align: center;
+    margin: 10px 0;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 0 10px;
+    color: #6c63ff;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #333;
 }
