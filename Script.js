@@ -1,3 +1,4 @@
+// Handle contact form submission
 document.getElementById('contact-form').addEventListener('submit', async function (e) {
     e.preventDefault(); // Prevent the default form submission
 
@@ -51,4 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const isDisplayed = dropdownContent.style.display === 'block';
         dropdownContent.style.display = isDisplayed ? 'none' : 'block';
     });
+
+    console.log('Website is loaded and ready!');
 });
