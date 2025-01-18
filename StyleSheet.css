@@ -3,7 +3,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-image: url('images\Wolf-2.webp'); /* Replace with your image path */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-repeat: no-repeat; /* Prevent tiling */
+    background-attachment: fixed; /* Keep the image fixed during scrolling */
+    background-position: center; /* Center the image */
+    background-color: #f4f4f9; /* Fallback color if the image fails to load */
     color: #333;
     line-height: 1.6;
 }
@@ -11,7 +16,7 @@ body {
 /* Header Styling */
 header,
 #site-header {
-    background-color: #2e73d4;
+    background-color: rgba(46, 115, 212, 0.8); /* Semi-transparent header for better text readability */
     color: white;
     text-align: center;
     padding: 20px;
@@ -88,7 +93,7 @@ main {
 }
 
 h2 {
-    color: #4CAF50;
+    color: #850b0b;
 }
 
 h3 {
@@ -181,9 +186,9 @@ nav a:hover {
 /* Animation */
 @keyframes fadeIn {
     from {
-        opacity: 1;
+        opacity: 0;
     }
     to {
-        opacity: 2;
+        opacity: 1;
     }
 }
