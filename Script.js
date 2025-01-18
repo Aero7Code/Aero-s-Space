@@ -1,54 +1,82 @@
+document.addEventListener('DOMContentLoaded', function () {
+    // Dynamically load the header content
+    const headerContainer = document.getElementById('header-container');
+    fetch('header.html', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/html',
+        },
+        credentials: 'include', // Include credentials for cookies/authentication if required
+    })
+        .then(response => {
+            console.log('Fetch response:', response); // Debugging
+            if (!response.ok) throw new Error(`Header file not found. Status: ${response.status}`);
+            return response.text();
+        })
+        .then(data => {
+            headerContainer.innerHTML = data;
+            console.log('Header content:', data); // Debugging
+
+            // Bind dropdown functionality after header is loaded
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            document.addEventListener('click', function (event) {
+                if (dropdown && !dropdown.contains(event.target)) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+
+            if (dropdown) {
+                dropdown.addEventListener('click', function () {
+                    const isDisplayed = dropdownContent.style.display === 'block';
+                    dropdownContent.style.display = isDisplayed ? 'none' : 'block';
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error loading header:', error); // Debugging
+            const errorMessage = error.message.includes('CORS')
+                ? 'A CORS error occurred. Please check your backend configuration.'
+                : 'Header could not be loaded. Please try again later.';
+            headerContainer.innerHTML = `<p>${errorMessage}</p>`;
+        });
+
+    console.log('Website is loaded and ready!');
+});
+
+// Handle contact form submission
 document.getElementById('contact-form').addEventListener('submit', async function (e) {
-    e.preventDefault(); // Prevent the default form submission
+    e.preventDefault();
 
-    // Get form data
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
 
-    // Simple form validation
     if (!name || !email || !message) {
-        document.getElementById('response').textContent = 'Please fill in all fields.';
+        document.getElementById('response').textContent = 'All fields are required.';
         return;
     }
 
-    // Send form data to the backend (Python server)
     try {
         const response = await fetch('http://localhost:5000/contact', {
             method: 'POST',
-            headers: {
+            headers: { 
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer <your-token>' // Optional: Include auth tokens if needed
             },
             body: JSON.stringify({ name, email, message }),
+            credentials: 'include', // Include credentials for cookies/authentication if required
         });
 
-        if (response.ok) {
-            document.getElementById('response').textContent = 'Your message has been sent!';
-            document.getElementById('contact-form').reset();
-        } else {
-            document.getElementById('response').textContent = 'There was an error. Please try again later.';
-        }
+        const result = await response.json();
+        document.getElementById('response').textContent =
+            response.ok ? result.message || 'Message sent successfully!' : result.error || 'An error occurred.';
     } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('response').textContent = 'There was an error. Please try again later.';
+        console.error('Error submitting form:', error);
+        const errorMessage = error.message.includes('CORS')
+            ? 'A CORS error occurred. Please check your backend configuration.'
+            : 'An error occurred. Please try again later.';
+        document.getElementById('response').textContent = errorMessage;
     }
-});
-
-// Add a simple interactive dropdown toggle
-document.addEventListener('DOMContentLoaded', function () {
-    const dropdown = document.querySelector('.dropdown');
-    const dropdownContent = document.querySelector('.dropdown-content');
-
-    // Close dropdown if user clicks outside
-    document.addEventListener('click', function (event) {
-        if (!dropdown.contains(event.target)) {
-            dropdownContent.style.display = 'none';
-        }
-    });
-
-    // Toggle dropdown menu
-    dropdown.addEventListener('click', function () {
-        const isDisplayed = dropdownContent.style.display === 'block';
-        dropdownContent.style.display = isDisplayed ? 'none' : 'block';
-    });
 });
