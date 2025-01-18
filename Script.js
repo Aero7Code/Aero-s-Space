@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Dynamically load the header content
     const headerContainer = document.getElementById('header-container');
-    fetch('header.html')
+    fetch('header.html', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'text/html',
+        },
+        credentials: 'include', // Include credentials for cookies/authentication if required
+    })
         .then(response => {
             console.log('Fetch response:', response); // Debugging
-            if (!response.ok) throw new Error('Header file not found');
+            if (!response.ok) throw new Error(`Header file not found. Status: ${response.status}`);
             return response.text();
         })
         .then(data => {
@@ -29,8 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         .catch(error => {
-            console.error('Error loading header:', error);
-            headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
+            console.error('Error loading header:', error); // Debugging
+            const errorMessage = error.message.includes('CORS')
+                ? 'A CORS error occurred. Please check your backend configuration.'
+                : 'Header could not be loaded. Please try again later.';
+            headerContainer.innerHTML = `<p>${errorMessage}</p>`;
         });
 
     console.log('Website is loaded and ready!');
@@ -52,8 +61,12 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     try {
         const response = await fetch('http://localhost:5000/contact', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer <your-token>' // Optional: Include auth tokens if needed
+            },
             body: JSON.stringify({ name, email, message }),
+            credentials: 'include', // Include credentials for cookies/authentication if required
         });
 
         const result = await response.json();
@@ -61,6 +74,9 @@ document.getElementById('contact-form').addEventListener('submit', async functio
             response.ok ? result.message || 'Message sent successfully!' : result.error || 'An error occurred.';
     } catch (error) {
         console.error('Error submitting form:', error);
-        document.getElementById('response').textContent = 'An error occurred. Please try again later.';
+        const errorMessage = error.message.includes('CORS')
+            ? 'A CORS error occurred. Please check your backend configuration.'
+            : 'An error occurred. Please try again later.';
+        document.getElementById('response').textContent = errorMessage;
     }
 });

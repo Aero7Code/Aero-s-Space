@@ -1,13 +1,22 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from waitress import serve
 import sqlite3
 import base64
 import os.path
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
+# Uncomment the following if Gmail API is used
+# from google.oauth2.credentials import Credentials
+# from googleapiclient.discovery import build
+# from googleapiclient.errors import HttpError
 
 app = Flask(__name__)
+
+# Allow CORS for specific origins and include credentials support
+CORS(
+    app,
+    origins=['http://localhost:3000'],  # Update to match your frontend's origin
+    supports_credentials=True
+)
 
 # Initialize the database
 DB_FILE = "emails.db"
@@ -27,7 +36,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Gmail API Setup
+# Gmail API Setup (Uncomment and configure if needed)
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 CREDENTIALS_FILE = 'credentials.json'  # Update this with your Gmail API credentials file
 
@@ -81,8 +90,17 @@ def save_to_db(data):
     conn.commit()
     conn.close()
 
-@app.route('/contact', methods=['POST'])
+@app.route('/contact', methods=['POST', 'OPTIONS'])
 def contact():
+    if request.method == 'OPTIONS':
+        # Handle preflight requests
+        response = jsonify({'message': 'CORS preflight handled'})
+        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        response.headers.add('Access-Control-Allow-Credentials', 'true')
+        return response, 200
+
     data = request.get_json()
 
     # Validate incoming data
