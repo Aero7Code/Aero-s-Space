@@ -181,7 +181,7 @@ nav a:hover {
 /* Animation */
 @keyframes fadeIn {
     from {
-        opacity: 0.5;
+        opacity: 1;
     }
     to {
         opacity: 2;
