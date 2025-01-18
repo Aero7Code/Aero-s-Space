@@ -80,6 +80,51 @@ header nav a:hover {
     animation: slideIn 1s ease-in-out; /* Page content animation */
 }
 
+/* Dropdown Menu Styling */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.menu-icon {
+    width: 40px; /* Adjust icon size */
+    height: 40px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* Align to the right edge */
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 /* Page Content Animation */
 @keyframes slideIn {
     from {

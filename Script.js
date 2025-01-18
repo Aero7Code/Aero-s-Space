@@ -39,26 +39,24 @@ async function loadHeader(container) {
     }
 }
 
-// Function to initialize dropdown functionality
-function initDropdown() {
+document.addEventListener('DOMContentLoaded', () => {
     const dropdown = document.querySelector('.dropdown');
     const dropdownContent = document.querySelector('.dropdown-content');
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function (event) {
-        if (dropdown && !dropdown.contains(event.target)) {
+    // Close dropdown if clicked outside
+    document.addEventListener('click', (event) => {
+        if (!dropdown.contains(event.target)) {
             dropdownContent.style.display = 'none';
         }
     });
 
-    // Toggle dropdown menu
-    if (dropdown) {
-        dropdown.addEventListener('click', function () {
-            const isDisplayed = dropdownContent.style.display === 'block';
-            dropdownContent.style.display = isDisplayed ? 'none' : 'block';
-        });
-    }
-}
+    dropdown.addEventListener('click', (event) => {
+        const isDisplayed = dropdownContent.style.display === 'block';
+        dropdownContent.style.display = isDisplayed ? 'none' : 'block';
+        event.stopPropagation(); // Prevent immediate closing
+    });
+});
+
 
 // Handle contact form submission
 document.getElementById('contact-form').addEventListener('submit', async function (e) {
