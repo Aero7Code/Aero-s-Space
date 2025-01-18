@@ -14,7 +14,7 @@ body {
 }
 
 /* Content Overlay */
-/*.content-overlay {
+.content-overlay {
     background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
     padding: 20px;
     margin: 0 auto;
@@ -103,10 +103,14 @@ main {
 }
 
 h2 {
-    color: #850b0b;
+    color: #1a0f7e;
 }
 
 h3 {
+    color: #b40f0f;
+}
+
+h4 {
     color: #b40f0f;
 }
 

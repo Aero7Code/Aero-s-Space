@@ -7,55 +7,37 @@
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
-    <div id="header-container"></div>
+    <!-- Wrapper for content overlay -->
+    <div class="content-overlay">
+        <!-- Header Container -->
+        <div id="header-container"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const headerContainer = document.getElementById('header-container');
-            fetch('header.html')
-                .then(response => {
-                    if (!response.ok) throw new Error('Header file not found');
-                    return response.text();
-                })
-                .then(data => {
-                    headerContainer.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error loading header:', error);
-                    headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
-                });
-        });
-    </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const headerContainer = document.getElementById('header-container');
+                fetch('header.html')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Header file not found');
+                        return response.text();
+                    })
+                    .then(data => {
+                        headerContainer.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error('Error loading header:', error);
+                        headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
+                    });
+            });
+        </script>
 
     <main>
-        <section id="home">
-            <h2>Welcome to the Space</h2>
-            <p>Explore our cozy mysteries and exciting projects we're working on!</p>
-        </section>
-
+        
         <section id="about">
             <h2>About Aero7</h2>
             <p>Welcome to my personal space! Here, you can learn more about me, what I do, and my cozy creations.</p>
         </section>
 
-        <section id="books">
-            <h2>Books</h2>
-            <div class="book-list">
-                <div class="book">
-                    <h3>Cozy Mystery Title</h3>
-                    <p>A thrilling and cozy read for all mystery lovers!</p>
-                </div>
-                <!-- Add more books here -->
-            </div>
-        </section>
-
-        <section id="blog">
-            <h2>Blog</h2>
-            <article>
-                <h3>Latest Updates</h3>
-                <p>Stay tuned for the latest blog posts and project updates.</p>
-            </article>
-        </section>
+        
 
         <section id="contact">
             <h2>Contact Me</h2>

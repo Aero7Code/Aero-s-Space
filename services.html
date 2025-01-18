@@ -7,25 +7,28 @@
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
-    <div id="header-container"></div>
+    <!-- Wrapper for content overlay -->
+    <div class="content-overlay">
+        <!-- Header Container -->
+        <div id="header-container"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const headerContainer = document.getElementById('header-container');
-            fetch('header.html')
-                .then(response => {
-                    if (!response.ok) throw new Error('Header file not found');
-                    return response.text();
-                })
-                .then(data => {
-                    headerContainer.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error loading header:', error);
-                    headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
-                });
-        });
-    </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const headerContainer = document.getElementById('header-container');
+                fetch('header.html')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Header file not found');
+                        return response.text();
+                    })
+                    .then(data => {
+                        headerContainer.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error('Error loading header:', error);
+                        headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
+                    });
+            });
+        </script>
 
     <main>
         <section>
