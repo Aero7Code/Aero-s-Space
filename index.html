@@ -7,29 +7,21 @@
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
+    <!-- Static Header -->
+    <header id="site-header">
+        <h1>Welcome to Aero's Space</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="#books">Books</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
     <!-- Wrapper for content overlay -->
     <div class="content-overlay">
-        <!-- Header Container -->
-        <div id="header-container"></div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const headerContainer = document.getElementById('header-container');
-                fetch('header.html')
-                    .then(response => {
-                        if (!response.ok) throw new Error('Header file not found');
-                        return response.text();
-                    })
-                    .then(data => {
-                        headerContainer.innerHTML = data;
-                    })
-                    .catch(error => {
-                        console.error('Error loading header:', error);
-                        headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
-                    });
-            });
-        </script>
-
         <!-- Main Content -->
         <main>
             <section id="home">
@@ -84,6 +76,20 @@
         </footer>
     </div>
 
+    <!-- External Scripts -->
+    <script>
+        // Content animation (sliding in on load)
+        document.addEventListener('DOMContentLoaded', () => {
+            const contentOverlay = document.querySelector('.content-overlay');
+            contentOverlay.style.opacity = 0;
+            contentOverlay.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                contentOverlay.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                contentOverlay.style.opacity = 1;
+                contentOverlay.style.transform = 'translateY(0)';
+            }, 50);
+        });
+    </script>
     <script src="Script.js"></script>
 </body>
 </html>

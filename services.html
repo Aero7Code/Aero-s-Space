@@ -7,30 +7,61 @@
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
-    <!-- Wrapper for content overlay -->
-    <div class="content-overlay">
-        <!-- Header Container -->
-        <div id="header-container"></div>
+    <!-- Persistent Header -->
+    <div id="header-container"></div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const headerContainer = document.getElementById('header-container');
-                fetch('header.html')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const headerContainer = document.getElementById('header-container');
+            
+            // Only fetch the header if it's not already loaded
+            if (!headerContainer.innerHTML.trim()) {
+                fetch('header.html', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'text/html',
+                    },
+                    credentials: 'include', // Include cookies/authentication if required
+                })
                     .then(response => {
                         if (!response.ok) throw new Error('Header file not found');
                         return response.text();
                     })
                     .then(data => {
                         headerContainer.innerHTML = data;
+
+                        // Initialize dropdown functionality if necessary
+                        initDropdown();
                     })
                     .catch(error => {
                         console.error('Error loading header:', error);
                         headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
                     });
-            });
-        </script>
+            }
+        });
 
-    <main>
+        // Function to initialize dropdown functionality
+        function initDropdown() {
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            document.addEventListener('click', function (event) {
+                if (dropdown && !dropdown.contains(event.target)) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+
+            if (dropdown) {
+                dropdown.addEventListener('click', function () {
+                    const isDisplayed = dropdownContent.style.display === 'block';
+                    dropdownContent.style.display = isDisplayed ? 'none' : 'block';
+                });
+            }
+        }
+    </script>
+
+    <!-- Main Content -->
+    <main class="content-overlay">
         <section>
             <h2>Our Services</h2>
             <p>Explore the various services I provide to enhance your experience:</p>
@@ -52,6 +83,7 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Aero7Code. All rights reserved.</p>
     </footer>
