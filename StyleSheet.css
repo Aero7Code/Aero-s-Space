@@ -32,7 +32,7 @@ header img,
 #site-header img {
     max-width: 100%; /* Prevent image from exceeding container size */
     height: auto; /* Maintain aspect ratio */
-    width: 40px; /* Desired width */
+    width: 80px; /* Desired width */
 }
 
 /* Dropdown Menu Styling */
