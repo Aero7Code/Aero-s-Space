@@ -26,10 +26,10 @@ body {
 /* Sticky Header Styling */
 header,
 #site-header {
-    position: fixed; /* Fix the header to the viewport */
+    position: sticky; /* Fix the header to the viewport */
     top: 0; /* Stick to the top of the screen */
-    /*left: 0;*/ /* Optional: Stick to the left side */
-    /*right: 0;*/ /* Stick to the right side */
+    left: 0;  /* Optional: Stick to the left side */
+    right: 0;  /* Stick to the right side */
     height: 10px; /* Adjust height as needed */
     width: 50%; /* Ensure it spans the full width */
     background-color: rgba(46, 115, 212, 0.929); /* Semi-transparent header for better text readability */
