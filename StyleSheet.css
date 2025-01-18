@@ -15,7 +15,7 @@ body {
 }
 
 /* Background Overlay */
-body::before {
+/*body::before {
     content: "";
     position: absolute;
     top: 0;
