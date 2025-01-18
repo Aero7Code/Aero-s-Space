@@ -31,7 +31,7 @@ header,
     /*left: 0;*/ /* Optional: Stick to the left side */
     /*right: 0;*/ /* Stick to the right side */
     height: 10px; /* Adjust height as needed */
-    width: 45%; /* Ensure it spans the full width */
+    width: 100%; /* Ensure it spans the full width */
     background-color: rgba(46, 115, 212, 0.929); /* Semi-transparent header for better text readability */
     color: white;
     text-align: center;
