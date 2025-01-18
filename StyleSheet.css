@@ -22,7 +22,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('images/Wolf-2.webp'); /* Replace with your image path */
+    background-image: url(''); /* Replace with your image path */
     background-size: cover;
     background-position: Fixed;
     opacity: 0.5; /* Adjust the opacity for the overlay effect */
