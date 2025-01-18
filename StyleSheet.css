@@ -13,6 +13,16 @@ body {
     line-height: 1.6;
 }
 
+/* Content Overlay */
+.content-overlay {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px; /* Optional: Limit the width */
+    border-radius: 10px; /* Optional: Rounded corners for a polished look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Add subtle shadow for better focus */
+}
+
 /* Header Styling */
 header,
 #site-header {
