@@ -31,11 +31,11 @@ header,
     /*left: 0;*/ /* Optional: Stick to the left side */
     /*right: 0;*/ /* Stick to the right side */
     height: 10px; /* Adjust height as needed */
-    width: 100%; /* Ensure it spans the full width */
-    background-color: rgba(46, 115, 212, 0.8); /* Semi-transparent header for better text readability */
+    width: 45%; /* Ensure it spans the full width */
+    background-color: rgba(46, 115, 212, 0.929); /* Semi-transparent header for better text readability */
     color: white;
-    text-align: right;
-    padding: 10px;
+    text-align: center;
+    padding: 40px;
     z-index: 1000; /* Ensure it stays above other elements */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
     animation: fadeIn 1s ease-in-out;
