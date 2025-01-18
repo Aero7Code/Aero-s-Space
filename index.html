@@ -7,26 +7,26 @@
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to Aero's Space</h1>
-        <h2>Your place for cozy mysteries and random projects</h2>
-        <h3>This site is under live construction. Everything you see is a Temporary Place Holder.</h3>
-        
-        <p>Contact: <a href="mailto:lexyloveonme+AeroSpace@gmail.com">Here to reach me</a></p>
-        
-        <div class="dropdown">
-            <img src="images\Transparent_Cleaned_Logo.png" alt="Menu" class="dropbtn">
-            <div class="dropdown-content">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="services.html">Services</a>
-                <a href="#books">Books</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-        
-    </header>
+    <div id="header-container"></div>
+
+    <script>
+        // Dynamically load the header content
+        document.addEventListener('DOMContentLoaded', function () {
+            const headerContainer = document.getElementById('header-container');
+            fetch('header.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Header file not found');
+                    return response.text();
+                })
+                .then(data => {
+                    headerContainer.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading header:', error);
+                    headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
+                });
+        });
+    </script>
 
     <main>
         <section id="home">

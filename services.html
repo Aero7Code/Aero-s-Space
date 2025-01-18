@@ -7,20 +7,26 @@
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
-    <header>
-        <div class="dropdown">
-            <img src="images\Transparent_Cleaned_Logo.png" alt="Menu" class="dropbtn">
-            <div class="dropdown-content">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="services.html">Services</a>
-                <a href="#books">Books</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-        <h1>Services Offered</h1>
-    </header>
+    <div id="header-container"></div>
+
+    <script>
+        // Dynamically load the header content
+        document.addEventListener('DOMContentLoaded', function () {
+            const headerContainer = document.getElementById('header-container');
+            fetch('header.html')
+                .then(response => {
+                    if (!response.ok) throw new Error('Header file not found');
+                    return response.text();
+                })
+                .then(data => {
+                    headerContainer.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading header:', error);
+                    headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
+                });
+        });
+    </script>
 
     <main>
         <section>
@@ -35,7 +41,7 @@
 
         <section>
             <h2>Why Choose Us?</h2>
-            <p> I Aero prioritize:</p>
+            <p>I prioritize:</p>
             <ul>
                 <li>Quality and attention to detail</li>
                 <li>Customer satisfaction</li>
@@ -48,7 +54,6 @@
         <p>&copy; 2025 Aero7Code. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript File -->
     <script src="Script.js"></script>
 </body>
 </html>

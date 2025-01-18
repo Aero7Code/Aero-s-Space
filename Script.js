@@ -1,3 +1,37 @@
+document.addEventListener('DOMContentLoaded', function () {
+    // Dynamically load the header content
+    const headerContainer = document.getElementById('header-container');
+    fetch('header.html')
+        .then(response => {
+            if (!response.ok) throw new Error('Header file not found');
+            return response.text();
+        })
+        .then(data => {
+            headerContainer.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading header:', error);
+            headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
+        });
+
+    // Handle dropdown functionality
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    document.addEventListener('click', function (event) {
+        if (!dropdown.contains(event.target)) {
+            dropdownContent.style.display = 'none';
+        }
+    });
+
+    dropdown.addEventListener('click', function () {
+        const isDisplayed = dropdownContent.style.display === 'block';
+        dropdownContent.style.display = isDisplayed ? 'none' : 'block';
+    });
+
+    console.log('Website is loaded and ready!');
+});
+
 // Handle contact form submission
 document.getElementById('contact-form').addEventListener('submit', async function (e) {
     e.preventDefault(); // Prevent the default form submission
@@ -7,13 +41,21 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
-    // Simple form validation
-    if (!name || !email || !message) {
-        document.getElementById('response').textContent = 'Please fill in all fields.';
+    // Form validation
+    if (!name) {
+        document.getElementById('response').textContent = 'Please provide your name.';
+        return;
+    }
+    if (!email) {
+        document.getElementById('response').textContent = 'Please provide your email.';
+        return;
+    }
+    if (!message) {
+        document.getElementById('response').textContent = 'Please provide a message.';
         return;
     }
 
-    // Send form data to the backend (Python server)
+    // Send form data to the backend
     try {
         const response = await fetch('http://localhost:5000/contact', {
             method: 'POST',
@@ -23,35 +65,19 @@ document.getElementById('contact-form').addEventListener('submit', async functio
             body: JSON.stringify({ name, email, message }),
         });
 
-        if (response.ok) {
-            document.getElementById('response').textContent = 'Your message has been sent!';
-            document.getElementById('contact-form').reset();
-        } else {
-            document.getElementById('response').textContent = 'There was an error. Please try again later.';
+        try {
+            const result = await response.json();
+            if (response.ok) {
+                document.getElementById('response').textContent = result.message || 'Message sent successfully!';
+            } else {
+                document.getElementById('response').textContent = result.error || 'An error occurred while submitting the form.';
+            }
+        } catch (jsonError) {
+            console.error('Error parsing JSON response:', jsonError);
+            document.getElementById('response').textContent = 'An unexpected error occurred. Please try again.';
         }
     } catch (error) {
-        console.error('Error:', error);
-        document.getElementById('response').textContent = 'There was an error. Please try again later.';
+        console.error('Error submitting form:', error);
+        document.getElementById('response').textContent = 'An error occurred. Please try again later.';
     }
-});
-
-// Add a simple interactive dropdown toggle
-document.addEventListener('DOMContentLoaded', function () {
-    const dropdown = document.querySelector('.dropdown');
-    const dropdownContent = document.querySelector('.dropdown-content');
-
-    // Close dropdown if user clicks outside
-    document.addEventListener('click', function (event) {
-        if (!dropdown.contains(event.target)) {
-            dropdownContent.style.display = 'none';
-        }
-    });
-
-    // Toggle dropdown menu
-    dropdown.addEventListener('click', function () {
-        const isDisplayed = dropdownContent.style.display === 'block';
-        dropdownContent.style.display = isDisplayed ? 'none' : 'block';
-    });
-
-    console.log('Website is loaded and ready!');
 });
