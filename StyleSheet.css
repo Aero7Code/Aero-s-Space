@@ -27,13 +27,12 @@ header h1,
     font-size: 2.5em;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+/* Adjust header image size */
+header img,
+#site-header img {
+    max-width: 100%; /* Prevent image from exceeding container size */
+    height: auto; /* Maintain aspect ratio */
+    width: 40px; /* Desired width */
 }
 
 /* Dropdown Menu Styling */
@@ -44,15 +43,18 @@ header h1,
     z-index: 1000;
 }
 
+/* Dropdown Button as Image */
 .dropbtn {
-    width: 40px;
+    width: 40px; /* Adjust image size */
     height: 40px;
     cursor: pointer;
     border: none;
     background: none;
     padding: 0;
+    object-fit: contain; /* Ensure proper scaling within the button dimensions */
 }
 
+/* Dropdown Content */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -174,4 +176,14 @@ nav a {
 
 nav a:hover {
     color: #333;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
