@@ -24,7 +24,7 @@ body::before {
     height: 100%;
     background-image: url('images/Wolf-2.webp'); /* Replace with your image path */
     background-size: cover;
-    background-position: center;
+    background-position: Fixed;
     opacity: 0.5; /* Adjust the opacity for the overlay effect */
     z-index: -1; /* Ensure the background stays behind other content */
 }
