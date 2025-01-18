@@ -13,31 +13,23 @@ body {
     line-height: 1.6;
 }
 
-/* Content Overlay */
-.content-overlay {
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 1200px; /* Optional: Limit the width */
-    border-radius: 10px; /* Optional: Rounded corners for a polished look */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Add subtle shadow for better focus */
-}
-
 /* Sticky Header Styling */
 header,
 #site-header {
     position: fixed; /* Fix the header to the viewport */
     top: 0; /* Stick to the top of the screen */
-    width: 100%; /* Ensure it spans the full width */
-    background-color: rgba(46, 115, 212, 0.8); /* Semi-transparent header for better text readability */
+    left: 0; /* Align to the left edge */
+    width: 100vw; /* Ensure it spans the entire viewport width */
+    background-color: rgba(46, 115, 212, 0.8); /* Semi-transparent for readability */
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 20px 0; /* Adjust padding */
     z-index: 1000; /* Ensure it stays above other elements */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
-    animation: fadeIn 0s ease-in-out;
+    animation: fadeIn 1s ease-in-out;
 }
 
+/* Header Content Styling */
 header h1,
 #site-header h1 {
     margin: 0;
@@ -49,63 +41,28 @@ header img,
 #site-header img {
     max-width: 100%; /* Prevent image from exceeding container size */
     height: auto; /* Maintain aspect ratio */
-    width: 100px; /* Desired width */
+    width: 100px; /* Adjust to desired width */
 }
 
-/* Dropdown Menu Styling */
-.dropdown {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
-}
-
-/* Dropdown Button as Image */
-.dropbtn {
-    width: 140px; /* Adjust image size */
-    height: 140px;
-    cursor: pointer;
-    border: none;
-    background: none;
-    padding: 0;
-    object-fit: contain; /* Ensure proper scaling within the button dimensions */
-}
-
-/* Dropdown Content */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 5px;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-    border-bottom: 1px solid #ddd;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
+/* Content Overlay */
+.content-overlay {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px; /* Optional: Limit content width */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 /* Main Content Styling */
 main {
-    padding: 100px 20px 20px; /* Adjusted padding to prevent overlap with the sticky header */
+    padding: 120px 20px 20px; /* Offset to account for sticky header height */
     text-align: left;
 }
 
+/* Additional Styling (Unchanged) */
 h2 {
-    color: #1a0f7e; /* Adjusted h2 color - thats dark blue */
+    color: #1a0f7e;
 }
 
 h3 {
@@ -130,7 +87,6 @@ ul li:last-child {
     border-bottom: none;
 }
 
-/* Form Styling */
 form {
     max-width: 400px;
     margin: 0 auto;
@@ -171,7 +127,6 @@ form button:hover {
     background: #5754d8;
 }
 
-/* Footer Styling */
 footer {
     background-color: #333;
     color: white;
@@ -182,7 +137,6 @@ footer {
     width: 100%;
 }
 
-/* Navigation Styling */
 nav {
     text-align: center;
     margin: 10px 0;
@@ -202,7 +156,7 @@ nav a:hover {
 /* Animation */
 @keyframes fadeIn {
     from {
-        opacity: 1;
+        opacity: 0;
     }
     to {
         opacity: 1;
