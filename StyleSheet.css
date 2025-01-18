@@ -19,8 +19,8 @@ header,
     position: fixed; /* Fix the header to the viewport */
     top: 0; /* Stick to the top of the screen */
     left: 0; /* Align to the left edge */
-    width: 100vw; /* Ensure it spans the entire viewport width */
-    height: 80px; /* Set exact height for the header */
+    width: 50vw; /* Ensure it spans the entire viewport width */
+    height: 200px; /* Set exact height for the header */
     background-color: rgba(46, 115, 212, 0.8); /* Semi-transparent for readability */
     color: white;
     display: flex; /* Use flexbox for easy content alignment */

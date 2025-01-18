@@ -1,49 +1,56 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Dynamically load the header content
+    // Dynamically load the header content only if it's not already loaded
     const headerContainer = document.getElementById('header-container');
-    fetch('header.html', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'text/html',
-        },
-        credentials: 'include', // Include credentials for cookies/authentication if required
-    })
-        .then(response => {
-            console.log('Fetch response:', response); // Debugging
-            if (!response.ok) throw new Error(`Header file not found. Status: ${response.status}`);
-            return response.text();
+    if (!headerContainer.innerHTML.trim()) {
+        fetch('header.html', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'text/html',
+            },
+            credentials: 'include', // Include credentials for cookies/authentication if required
         })
-        .then(data => {
-            headerContainer.innerHTML = data;
-            console.log('Header content:', data); // Debugging
+            .then(response => {
+                console.log('Fetch response:', response); // Debugging
+                if (!response.ok) throw new Error(`Header file not found. Status: ${response.status}`);
+                return response.text();
+            })
+            .then(data => {
+                headerContainer.innerHTML = data;
+                console.log('Header content:', data); // Debugging
 
-            // Bind dropdown functionality after header is loaded
-            const dropdown = document.querySelector('.dropdown');
-            const dropdownContent = document.querySelector('.dropdown-content');
-
-            document.addEventListener('click', function (event) {
-                if (dropdown && !dropdown.contains(event.target)) {
-                    dropdownContent.style.display = 'none';
-                }
+                // Initialize dropdown functionality after header is loaded
+                initDropdown();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error); // Debugging
+                const errorMessage = error.message.includes('CORS')
+                    ? 'A CORS error occurred. Please check your backend configuration.'
+                    : 'Header could not be loaded. Please try again later.';
+                headerContainer.innerHTML = `<p>${errorMessage}</p>`;
             });
-
-            if (dropdown) {
-                dropdown.addEventListener('click', function () {
-                    const isDisplayed = dropdownContent.style.display === 'block';
-                    dropdownContent.style.display = isDisplayed ? 'none' : 'block';
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error loading header:', error); // Debugging
-            const errorMessage = error.message.includes('CORS')
-                ? 'A CORS error occurred. Please check your backend configuration.'
-                : 'Header could not be loaded. Please try again later.';
-            headerContainer.innerHTML = `<p>${errorMessage}</p>`;
-        });
+    }
 
     console.log('Website is loaded and ready!');
 });
+
+// Initialize dropdown functionality
+function initDropdown() {
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    document.addEventListener('click', function (event) {
+        if (dropdown && !dropdown.contains(event.target)) {
+            dropdownContent.style.display = 'none';
+        }
+    });
+
+    if (dropdown) {
+        dropdown.addEventListener('click', function () {
+            const isDisplayed = dropdownContent.style.display === 'block';
+            dropdownContent.style.display = isDisplayed ? 'none' : 'block';
+        });
+    }
+}
 
 // Handle contact form submission
 document.getElementById('contact-form').addEventListener('submit', async function (e) {
