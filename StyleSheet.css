@@ -26,8 +26,7 @@ header,
     padding: 20px 0; /* Adjust padding */
     z-index: 1000; /* Ensure it stays above other elements */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
-    /*animation: fadeIn 1s ease-in-out;
-}*/
+}
 
 /* Header Content Styling */
 header h1,
@@ -36,7 +35,7 @@ header h1,
     font-size: 2.5em;
 }
 
-/* Adjust header image size */
+/* Adjust Header Image Size */
 header img,
 #site-header img {
     max-width: 100%; /* Prevent image from exceeding container size */
@@ -52,6 +51,19 @@ header img,
     max-width: 1200px; /* Optional: Limit content width */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    animation: slideIn 1s ease-in-out; /* Page content animation */
+}
+
+/* Page Content Animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly below */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Slide into place */
+    }
 }
 
 /* Main Content Styling */
@@ -60,7 +72,7 @@ main {
     text-align: left;
 }
 
-/* Additional Styling (Unchanged) */
+/* Additional Styling */
 h2 {
     color: #1a0f7e;
 }
@@ -152,13 +164,3 @@ nav a {
 nav a:hover {
     color: #333;
 }
-
-/* Animation */
-/*@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}*/
