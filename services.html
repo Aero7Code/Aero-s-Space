@@ -7,46 +7,46 @@
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
-     <!-- Static Header -->
-     <header id="site-header">
+    <!-- Static Header -->
+    <header id="site-header">
         <h1>Welcome to Aero's Space</h1>
         <nav>
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="services.html">Services</a>
-            <a href="#books">Books</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="content-overlay">
-        <section>
-            <h2>Our Services</h2>
-            <p>Explore the various services I provide to enhance your experience:</p>
-            <ul>
-                <li><strong>Consulting:</strong> Personalized advice to help you achieve your goals.</li>
-                <li><strong>Development:</strong> Custom solutions tailored to your needs.</li>
-                <li><strong>Support:</strong> Ongoing assistance to ensure your success.</li>
-            </ul>
-        </section>
+    <!-- Wrapper for content overlay -->
+    <div class="content-overlay">
+        <!-- Main Content -->
+        <main>
+            <section>
+                <h2>Our Services</h2>
+                <p>Explore the various services I provide to enhance your experience:</p>
+                <ul>
+                    <li><strong>Consulting:</strong> Personalized advice to help you achieve your goals.</li>
+                    <li><strong>Development:</strong> Custom solutions tailored to your needs.</li>
+                    <li><strong>Support:</strong> Ongoing assistance to ensure your success.</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>Why Choose Us?</h2>
-            <p>I prioritize:</p>
-            <ul>
-                <li>Quality and attention to detail</li>
-                <li>Customer satisfaction</li>
-                <li>Innovative and creative solutions</li>
-            </ul>
-        </section>
-    </main>
+            <section>
+                <h2>Why Choose Us?</h2>
+                <p>I prioritize:</p>
+                <ul>
+                    <li>Quality and attention to detail</li>
+                    <li>Customer satisfaction</li>
+                    <li>Innovative and creative solutions</li>
+                </ul>
+            </section>
+        </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Aero7Code. All rights reserved.</p>
-    </footer>
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Aero7Code. All rights reserved.</p>
+        </footer>
+    </div>
 
     <!-- External Scripts -->
     <script>
@@ -55,11 +55,11 @@
             const contentOverlay = document.querySelector('.content-overlay');
             contentOverlay.style.opacity = 0;
             contentOverlay.style.transform = 'translateY(20px)';
-            setTimeout(() => {
+            requestAnimationFrame(() => {
                 contentOverlay.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 contentOverlay.style.opacity = 1;
                 contentOverlay.style.transform = 'translateY(0)';
-            }, 50);
+            });
         });
     </script>
 

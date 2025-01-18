@@ -25,7 +25,7 @@ header,
     color: white;
     display: flex; /* Use flexbox for layout */
     align-items: center; /* Vertically center content */
-    justify-content: space-between; /* Space out items horizontally */
+    justify-content: space-around; /* Space out items horizontally */
     padding: 0 30px; /* Add horizontal padding */
     z-index: 1000; /* Ensure it stays above other elements */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
