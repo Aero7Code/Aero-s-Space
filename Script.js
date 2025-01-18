@@ -3,14 +3,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const headerContainer = document.getElementById('header-container');
     fetch('header.html')
         .then(response => {
+            console.log('Fetch response:', response); // Debugging: Log the entire response
             if (!response.ok) throw new Error('Header file not found');
             return response.text();
         })
         .then(data => {
+            console.log('Header content:', data); // Debugging: Log the fetched HTML content
             headerContainer.innerHTML = data;
         })
         .catch(error => {
-            console.error('Error loading header:', error);
+            console.error('Error loading header:', error); // Debugging: Log any errors
             headerContainer.innerHTML = '<p>Header could not be loaded. Please try again later.</p>';
         });
 
@@ -31,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log('Website is loaded and ready!');
 });
+
 
 // Handle contact form submission
 document.getElementById('contact-form').addEventListener('submit', async function (e) {
