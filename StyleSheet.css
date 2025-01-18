@@ -11,7 +11,6 @@ body {
     background-color: #f4f4f9; /* Fallback color if the image fails to load */
     color: #333;
     line-height: 1.6;
-    position: relative; /* Ensure the ::before pseudo-element is positioned correctly */
 }
 
 /* Content Overlay */
@@ -27,16 +26,13 @@ body {
 /* Sticky Header Styling */
 header,
 #site-header {
-    position: sticky; /* Fix the header to the viewport */
+    position: fixed; /* Fix the header to the viewport */
     top: 0; /* Stick to the top of the screen */
-    left: 0;  /* Optional: Stick to the left side */
-    right: 0;  /* Stick to the right side */
-    height: 10px; /* Adjust height as needed */
     width: 100%; /* Ensure it spans the full width */
-    background-color: rgba(46, 115, 212, 0.929); /* Semi-transparent header for better text readability */
+    background-color: rgba(46, 115, 212, 0.8); /* Semi-transparent header for better text readability */
     color: white;
     text-align: center;
-    padding: 40px;
+    padding: 20px;
     z-index: 1000; /* Ensure it stays above other elements */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
     animation: fadeIn 1s ease-in-out;
@@ -109,7 +105,7 @@ main {
 }
 
 h2 {
-    color: #1a0f7e;
+    color: #1a0f7e; /* Adjusted h2 color - thats dark blue */
 }
 
 h3 {

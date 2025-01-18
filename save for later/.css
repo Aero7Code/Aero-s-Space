@@ -1,0 +1,14 @@
+/* Background Overlay */
+/*body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(''); /* Replace with your image path */
+    /*background-size: cover;
+    background-position: Fixed;
+    opacity: 0.5; /* Adjust the opacity for the overlay effect */
+    /*z-index: -1; /* Ensure the background stays behind other content */
+}
