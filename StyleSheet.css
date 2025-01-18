@@ -26,7 +26,7 @@ body {
 /* Sticky Header Styling */
 header,
 #site-header {
-    position: sticky; /* Fix the header to the viewport */
+    position: fixed; /* Fix the header to the viewport */
     top: 0; /* Stick to the top of the screen */
     /*left: 0;*/ /* Optional: Stick to the left side */
     /*right: 0;*/ /* Stick to the right side */
