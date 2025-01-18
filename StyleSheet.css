@@ -168,3 +168,42 @@ nav a {
 nav a:hover {
     color: #333;
 }
+
+/* Style for the menu image acting as a button */
+/* Dropdown Button as Image */
+.dropbtn {
+    width: 40px; /* Set the width of the image */
+    height: 40px; /* Set the height of the image */
+    cursor: pointer; /* Add pointer cursor */
+    border: none; /* Remove any border */
+    background: none; /* Remove background */
+    padding: 0; /* Remove padding */
+    display: block; /* Ensure it's treated as a block element */
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
