@@ -29,7 +29,7 @@ header,
     position: sticky; /* Fix the header to the viewport */
     top: 0; /* Stick to the top of the screen */
     left: 0;
-    height: 100px; /* Adjust height as needed */
+    height: 10px; /* Adjust height as needed */
     width: 100%; /* Ensure it spans the full width */
     background-color: rgba(46, 115, 212, 0.8); /* Semi-transparent header for better text readability */
     color: white;
