@@ -26,8 +26,8 @@ header,
     padding: 20px 0; /* Adjust padding */
     z-index: 1000; /* Ensure it stays above other elements */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
-    animation: fadeIn 1s ease-in-out;
-}
+    /*animation: fadeIn 1s ease-in-out;
+}*/
 
 /* Header Content Styling */
 header h1,
@@ -154,11 +154,11 @@ nav a:hover {
 }
 
 /* Animation */
-@keyframes fadeIn {
+/*@keyframes fadeIn {
     from {
         opacity: 0;
     }
     to {
         opacity: 1;
     }
-}
+}*/
