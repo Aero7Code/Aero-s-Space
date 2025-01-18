@@ -45,8 +45,8 @@ header img,
 
 /* Dropdown Button as Image */
 .dropbtn {
-    width: 80px; /* Adjust image size */
-    height: 80px;
+    width: 140px; /* Adjust image size */
+    height: 140px;
     cursor: pointer;
     border: none;
     background: none;
