@@ -26,43 +26,29 @@
                     <a href="about.html">About</a>
                     <a href="services.html">Services</a>
                     <a href="info.html">Info</a>
-                    
                 </div>
             </div>
         </nav>
-    
     </header>
 
     <!-- Wrapper for content overlay -->
     <div class="content-overlay">
         <!-- Main Content -->
         <main>
-            <section id="home">
-                <h2>Welcome to the Space</h2>
-                <p>Explore our cozy mysteries and exciting projects we're working on!</p>
+            <!-- Animated Image Section -->
+            <section id="hero-image-section">
+                <div class="hero-image-container">
+                    <img src="images/photo.webp" alt="Hero Image" class="hero-image">
+                    <div class="hero-text">
+                        <h2 class="hero-title">Welcome to Aero's World</h2>
+                        <p class="hero-caption">Discover the magic of innovation and creativity.</p>
+                    </div>
+                </div>
             </section>
 
             <section id="about">
                 <h2>About Aero7</h2>
                 <p>Welcome to my personal space! Here, you can learn more about me, what I do, and my cozy creations.</p>
-            </section>
-
-            <section id="books">
-                <h2>Books</h2>
-                <div class="book-list">
-                    <div class="book">
-                        <h3>Cozy Mystery Title</h3>
-                        <p>A thrilling and cozy read for all mystery lovers!</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="blog">
-                <h2>Blog</h2>
-                <article>
-                    <h3>Latest Updates</h3>
-                    <p>Stay tuned for the latest blog posts and project updates.</p>
-                </article>
             </section>
 
             <section id="contact">
@@ -91,18 +77,28 @@
 
     <!-- External Scripts -->
     <script>
-        // Content animation (sliding in on load)
+        // Image and text animations
         document.addEventListener('DOMContentLoaded', () => {
-            const contentOverlay = document.querySelector('.content-overlay');
-            contentOverlay.style.opacity = 0;
-            contentOverlay.style.transform = 'translateY(20px)';
+            const heroImage = document.querySelector('.hero-image');
+            const heroText = document.querySelector('.hero-text');
+            
+            // Initial positions for animation
+            heroImage.style.opacity = 0;
+            heroImage.style.transform = 'translateY(-50px)';
+            heroText.style.opacity = 0;
+
+            // Trigger animations
             setTimeout(() => {
-                contentOverlay.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                contentOverlay.style.opacity = 1;
-                contentOverlay.style.transform = 'translateY(0)';
-            }, 50);
+                heroImage.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                heroImage.style.opacity = 1;
+                heroImage.style.transform = 'translateY(0)';
+
+                setTimeout(() => {
+                    heroText.style.transition = 'opacity 0.8s ease';
+                    heroText.style.opacity = 1;
+                }, 400); // Delay for the text fade-in
+            }, 200); // Delay for the image drop-in
         });
     </script>
-    <script src="Script.js"></script>
 </body>
 </html>

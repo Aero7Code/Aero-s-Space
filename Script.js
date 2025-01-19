@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
         loadHeader(headerContainer);
     }
 
+    // Trigger content animations for the hero section
+    animateHeroSection();
+
     console.log('Website is loaded and ready!');
 });
 
@@ -39,7 +42,8 @@ async function loadHeader(container) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize dropdown functionality
+function initDropdown() {
     const dropdown = document.querySelector('.dropdown');
     const dropdownContent = document.querySelector('.dropdown-content');
 
@@ -55,8 +59,33 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdownContent.style.display = isDisplayed ? 'none' : 'block';
         event.stopPropagation(); // Prevent immediate closing
     });
-});
+}
 
+// Function to animate hero section
+function animateHeroSection() {
+    const heroImage = document.querySelector('.hero-image');
+    const heroText = document.querySelector('.hero-text');
+
+    if (heroImage && heroText) {
+        // Initial styles for animation
+        heroImage.style.opacity = 0;
+        heroImage.style.transform = 'translateY(-50px)';
+        heroText.style.opacity = 0;
+
+        // Trigger image animation
+        setTimeout(() => {
+            heroImage.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            heroImage.style.opacity = 1;
+            heroImage.style.transform = 'translateY(0)';
+
+            // Trigger text animation after image
+            setTimeout(() => {
+                heroText.style.transition = 'opacity 0.8s ease';
+                heroText.style.opacity = 1;
+            }, 400); // Delay for text fade-in
+        }, 200); // Delay for image drop-in
+    }
+}
 
 // Handle contact form submission
 document.getElementById('contact-form').addEventListener('submit', async function (e) {
@@ -75,7 +104,7 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     try {
         const response = await fetch('http://localhost:5000/contact', {
             method: 'POST',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer <your-token>', // Optional: Include auth tokens if needed
             },

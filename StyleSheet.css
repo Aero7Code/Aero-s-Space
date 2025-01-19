@@ -231,3 +231,45 @@ nav a {
 nav a:hover {
     color: #333;
 }
+
+/* Hero Image Section */
+#hero-image-section {
+    text-align: center;
+    margin: 50px 0;
+    position: relative;
+}
+
+.hero-image-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.hero-text {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); /* Text shadow for visibility */
+}
+
+.hero-title {
+    font-size: 2em;
+    margin: 0;
+}
+
+.hero-caption {
+    font-size: 1.2em;
+    margin: 5px 0 0;
+}
