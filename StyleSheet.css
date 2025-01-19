@@ -43,7 +43,7 @@ header h1,
 /* Adjust Header Image Size */
 header img,
 #site-header img {
-    height: 80px; /* Exact height for the logo */
+    height: 100px; /* Exact height for the logo */
     width: auto; /* Maintain aspect ratio */
     margin-right: 20px; /* Add spacing between the image and text */
 }
