@@ -17,41 +17,41 @@ body {
 header,
 #site-header {
     position: fixed; /* Fix the header to the viewport */
-    top: 0; /* Stick to the top of the screen */
-    left: 0; /* Align to the left edge */
+    top: 0;
+    left: 0;
     width: 100%; /* Ensure it spans the full viewport width */
     height: 100px; /* Set exact height for the header */
     background-color: rgba(46, 115, 212, 0.9); /* Slightly opaque for readability */
     color: white;
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Vertically center content */
-    justify-content: space-around; /* Space out items horizontally */
-    padding: 0 30px; /* Add horizontal padding */
-    z-index: 1000; /* Ensure it stays above other elements */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out content */
+    padding: 0 30px;
+    z-index: 1000;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Add a subtle border for separation */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Add subtle border */
 }
 
 /* Header Content Styling */
 header h1,
 #site-header h1 {
     margin: 0;
-    font-size: 1.8em; /* Adjust font size for better spacing */
+    font-size: 1.8em;
     white-space: nowrap; /* Prevent text wrapping */
 }
 
 /* Adjust Header Image Size */
 header img,
 #site-header img {
-    height: 100px; /* Exact height for the logo */
-    width: auto; /* Maintain aspect ratio */
-    margin-right: 20px; /* Add spacing between the image and text */
+    height: 100px;
+    width: auto;
+    margin-right: 20px;
 }
 
 /* Navigation Styling within Header */
 header nav {
     display: flex;
-    gap: 15px; /* Add space between navigation items */
+    gap: 15px;
 }
 
 header nav a {
@@ -115,14 +115,31 @@ header nav a:hover {
     text-decoration: none;
     display: block;
     border-bottom: 1px solid #ddd;
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
+/* Escaping Menu Items */
+.menu-item.escaping {
+    position: absolute !important; /* Switch to absolute when escaping */
+    z-index: 1000;
+}
+
+.menu-item.bouncing {
+    animation: bounce 2s infinite ease-in-out;
+}
+
+/* Keyframes for Bouncing */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 /* Page Content Animation */
@@ -137,139 +154,69 @@ header nav a:hover {
     }
 }
 
-/* Main Content Styling */
-main {
-    padding: 140px 20px 20px; /* Offset to prevent overlap with sticky header */
-    text-align: left;
-}
-
-/* Additional Styling */
-h2 {
-    color: #1a0f7e;
-}
-
-h3 {
-    color: #b40f0f;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-ul li:last-child {
-    border-bottom: none;
-}
-
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-form input,
-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-form button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background: #6c63ff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-}
-
-form button:hover {
-    background: #5754d8;
-}
-
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-nav {
-    text-align: center;
-    margin: 10px 0;
-}
-
-nav a {
-    text-decoration: none;
-    margin: 0 10px;
-    color: #6c63ff;
-    font-weight: bold;
-}
-
-nav a:hover {
-    color: #333;
-}
-
 /* Hero Image Section */
 #hero-image-section {
-    text-align: center; /* Center align content */
-    margin: 50px 0; /* Add space above and below */
+    text-align: center;
+    margin: 50px 0;
     position: relative;
 }
 
 .hero-image-container {
     position: relative;
     display: inline-block;
-    width: 100%; /* Ensure full width */
-    max-width: 400px; /* Adjust image container width */
+    width: 100%;
+    max-width: 400px;
     margin: 0 auto;
 }
 
 .hero-image {
-    width: 100%; /* Ensure image fills container */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 10px; /* Optional: Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: dropIn 1.5s ease-in-out; /* Drop in animation */
 }
 
 .hero-text {
     position: absolute;
-    bottom: 20px; /* Position text near the bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /
-    text-align: center; /
-    color: white; /* Text color */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); /* Text shadow for visibility */
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out 1.5s forwards; /* Fade in text */
 }
 
 .hero-title {
-    font-size: 2em; /* Adjust font size */
+    font-size: 2em;
     margin: 0;
 }
 
 .hero-caption {
-    font-size: 1.2em; /* Adjust font size */
+    font-size: 1.2em;
     margin: 5px 0 0;
+}
+
+/* Keyframes for Drop-in */
+@keyframes dropIn {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Keyframes for Fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
