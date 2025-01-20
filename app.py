@@ -128,10 +128,18 @@ def save_to_db(data):
     finally:
         conn.close()
 
+def is_valid_email(email):
+    """Helper function to validate email format."""
+    try:
+        name, addr = parseaddr(email)
+        return '@' in addr and '.' in addr.split('@')[-1]
+    except Exception:
+        return False
+
 @app.route('/contact', methods=['POST', 'OPTIONS'])
 def contact():
     if request.method == 'OPTIONS':
-        # Handle preflight requests
+        # Handle preflight requests for CORS
         response = jsonify({'message': 'CORS preflight handled'})
         response.headers.add('Access-Control-Allow-Origin', os.getenv('CORS_ORIGIN', 'http://localhost:3000'))
         response.headers.add('Access-Control-Allow-Methods', 'POST')
@@ -147,13 +155,26 @@ def contact():
     message = data.get('message')
 
     if not name or not email or not message:
-        return jsonify({'error': 'Missing fields'}), 400
+        logger.warning("Validation failed: Missing fields")
+        return jsonify({'error': 'Missing fields. All fields are required.'}), 400
 
-    if '@' not in parseaddr(email)[1]:
-        return jsonify({'error': 'Invalid email address'}), 400
+    if not is_valid_email(email):
+        logger.warning(f"Validation failed: Invalid email address '{email}'")
+        return jsonify({'error': 'Invalid email address. Please enter a valid email.'}), 400
+
+    if len(message) > 1000:
+        logger.warning("Validation failed: Message too long")
+        return jsonify({'error': 'Message is too long. Maximum allowed is 1000 characters.'}), 400
 
     # Handle the data (e.g., save to a database or send an email)
     logger.info(f"Message received from {name} ({email}): {message}")
+
+    try:
+        # Example: Save to database (optional, replace with actual logic)
+        save_to_db([(name, email, message)])  
+    except Exception as e:
+        logger.error(f"Error saving to database: {e}")
+        return jsonify({'error': 'Internal server error. Please try again later.'}), 500
 
     return jsonify({'message': 'Your message has been received!'}), 200
 
@@ -165,12 +186,18 @@ def sync_emails():
         logger.warning("Unauthorized access to /sync_emails")
         return jsonify({'error': 'Unauthorized'}), 401
 
-    emails = get_python_labeled_emails()
-    if not emails:
-        return jsonify({'message': 'No new emails found with the label "Python".'}), 200
+    try:
+        emails = get_python_labeled_emails()
+        if not emails:
+            logger.info("No new emails found with the label 'Python'.")
+            return jsonify({'message': 'No new emails found with the label "Python".'}), 200
 
-    save_to_db(emails)
-    return jsonify({'message': f'{len(emails)} emails synced successfully.'}), 200
+        save_to_db(emails)
+        logger.info(f"{len(emails)} emails synced successfully.")
+        return jsonify({'message': f'{len(emails)} emails synced successfully.'}), 200
+    except Exception as e:
+        logger.error(f"Error syncing emails: {e}")
+        return jsonify({'error': 'Failed to sync emails. Please try again later.'}), 500
 
 if __name__ == '__main__':
     init_db()
