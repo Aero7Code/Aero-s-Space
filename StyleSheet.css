@@ -11,6 +11,9 @@ body {
     background-color: #f4f4f9; /* Fallback color if the image fails to load */
     color: #333;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure footer stays at the bottom */
 }
 
 /* Sticky Header Styling */
@@ -69,15 +72,22 @@ header nav a:hover {
     color: #f4f4f9;
 }
 
-/* Content Overlay */
-.content-overlay {
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 1200px; /* Optional: Limit content width */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    animation: slideIn 1s ease-in-out; /* Page content animation */
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    header nav {
+        flex-direction: column; /* Stack links vertically */
+        align-items: center;
+    }
+
+    header nav a {
+        font-size: 1.2em;
+        padding: 10px;
+    }
+
+    .dropdown-content {
+        min-width: 100%;
+        text-align: center;
+    }
 }
 
 /* Dropdown Menu Styling */
@@ -94,8 +104,8 @@ header nav a:hover {
 }
 
 .menu-icon {
-    width: 190px; /* Adjust icon size */
-    height: 190px;
+    width: 50px; /* Adjust icon size */
+    height: 50px;
 }
 
 .dropdown-content {
@@ -125,6 +135,17 @@ header nav a:hover {
     display: block;
 }
 
+/* Content Overlay */
+.content-overlay {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px; /* Optional: Limit content width */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    animation: slideIn 1s ease-in-out; /* Page content animation */
+}
+
 /* Page Content Animation */
 @keyframes slideIn {
     from {
@@ -141,6 +162,7 @@ header nav a:hover {
 main {
     padding: 140px 20px 20px; /* Offset to prevent overlap with sticky header */
     text-align: left;
+    flex: 1; /* Ensures footer is pushed to the bottom for short content */
 }
 
 /* Additional Styling */
@@ -206,32 +228,6 @@ form button:hover {
     background: #5754d8;
 }
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-nav {
-    text-align: center;
-    margin: 10px 0;
-}
-
-nav a {
-    text-decoration: none;
-    margin: 0 10px;
-    color: #6c63ff;
-    font-weight: bold;
-}
-
-nav a:hover {
-    color: #333;
-}
-
 /* Hero Image Section */
 #hero-image-section {
     text-align: center; /* Center align content */
@@ -258,6 +254,29 @@ nav a:hover {
     position: absolute;
     bottom: 20px; /* Position text near the bottom */
     left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /
-    text-align: center; /
+    transform: translateX(-50%);
+    text-align: center;
     color: white; /* Text color */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); /* Text shadow for visibility */
+    animation: fadeInText 1s ease-in-out;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
