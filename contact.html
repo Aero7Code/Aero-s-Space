@@ -37,7 +37,6 @@
     <div class="content-overlay">
         <!-- Main Content -->
         <main>
-            
             <section id="contact">
                 <h2>Contact Me</h2>
                 <form id="contact-form">
@@ -64,6 +63,54 @@
 
     <!-- External Scripts -->
     <script>
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+                const responseElement = document.getElementById('response');
+
+                if (!name || !email || !message) {
+                    responseElement.textContent = 'All fields are required.';
+                    return;
+                }
+
+                if (!/\S+@\S+\.\S+/.test(email)) {
+                    responseElement.textContent = 'Please enter a valid email address.';
+                    return;
+                }
+
+                responseElement.textContent = 'Sending message... Please wait.';
+
+                try {
+                    const response = await fetch('http://localhost:5000/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, email, message }),
+                        credentials: 'include',
+                    });
+
+                    const result = await response.json();
+                    responseElement.textContent = response.ok
+                        ? result.message || 'Message sent successfully!'
+                        : result.error || 'An error occurred.';
+
+                    if (response.ok) {
+                        document.getElementById('name').value = '';
+                        document.getElementById('email').value = '';
+                        document.getElementById('message').value = '';
+                    }
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    responseElement.textContent = 'An error occurred. Please try again later.';
+                }
+            });
+        }
+
         // Content animation (sliding in on load)
         document.addEventListener('DOMContentLoaded', () => {
             const contentOverlay = document.querySelector('.content-overlay');
@@ -76,6 +123,5 @@
             }, 50);
         });
     </script>
-    <script src="Script.js"></script>
 </body>
 </html>
