@@ -60,14 +60,14 @@ function initDropdown() {
 
     // Clear escape timer on hover out
     dropbtn.addEventListener('mouseleave', () => {
-        clearTimeout(escapeTimer);
-        isEscaping = false;
+        clearTimeout(escapeTimer); // Clear escape timer
+        isEscaping = false; // Reset escaping flag
     });
 
     // Close dropdown if clicked outside
     document.addEventListener('click', (event) => {
         if (!dropdown.contains(event.target)) {
-            dropdownContent.style.display = 'none';
+            dropdownContent.style.display = 'none'; // Hide dropdown content
             clearTimeout(escapeTimer); // Clear escape timer when menu closes
         }
     });
@@ -93,14 +93,14 @@ function startEscapeTimer(dropdownContent) {
 
 // Function to make menu items escape and bounce around
 function makeItemEscape(item) {
-    item.style.position = 'absolute';
-    item.style.transition = 'all 0.5s ease';
-    let screenWidth = window.innerWidth;
-    let screenHeight = window.innerHeight;
+    item.style.position = 'absolute'; // Position items absolutely
+    item.style.transition = 'all 0.5s ease'; // Smooth transition
+    let screenWidth = window.innerWidth; // Get screen width
+    let screenHeight = window.innerHeight;  // Get screen height
 
     function moveItem() {
-        let randomX = Math.random() * (screenWidth - item.offsetWidth);
-        let randomY = Math.random() * (screenHeight - item.offsetHeight);
+        let randomX = Math.random() * (screenWidth - item.offsetWidth); // Random X position
+        let randomY = Math.random() * (screenHeight - item.offsetHeight); // Random Y position
         item.style.transform = `translate(${randomX}px, ${randomY}px)`;
     }
 
