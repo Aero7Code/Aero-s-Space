@@ -130,7 +130,7 @@ function animateHeroSection() {
     }, 1200);
 }
 
-// Handle contact form submission
+//* Contact form submission*//
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', async function (e) {
@@ -146,6 +146,13 @@ if (contactForm) {
             return;
         }
 
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            responseElement.textContent = 'Please enter a valid email address.';
+            return;
+        }
+
+        responseElement.textContent = 'Sending message... Please wait.';
+
         try {
             const response = await fetch('http://localhost:5000/contact', {
                 method: 'POST',
@@ -158,10 +165,21 @@ if (contactForm) {
             responseElement.textContent = response.ok
                 ? result.message || 'Message sent successfully!'
                 : result.error || 'An error occurred.';
+
+            if (response.ok) {
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
+            }
         } catch (error) {
             console.error('Error submitting form:', error);
-            responseElement.textContent = 'An error occurred. Please try again later.';
+            if (error.message.includes('NetworkError')) {
+                responseElement.textContent = 'Network error. Please check your connection.';
+            } else {
+                responseElement.textContent = 'An error occurred. Please try again later.';
+            }
         }
     });
 }
+
 
