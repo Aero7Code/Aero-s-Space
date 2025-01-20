@@ -63,27 +63,27 @@ function initDropdown() {
 
 // Function to animate hero section
 function animateHeroSection() {
-    const heroImage = document.querySelector('.hero-image');
-    const heroText = document.querySelector('.hero-text');
+    const heroImage = document.querySelector('.hero-image'); // Image element
+    const heroText = document.querySelector('.hero-text'); // Text element
 
     if (heroImage && heroText) {
         // Initial styles for animation
-        heroImage.style.opacity = 0;
-        heroImage.style.transform = 'translateY(-50px)';
-        heroText.style.opacity = 0;
+        heroImage.style.opacity = 0; // Hide image
+        heroImage.style.transform = 'translateY(-50px)'; // Move image up
+        heroText.style.opacity = 0; // Hide text
 
         // Trigger image animation
         setTimeout(() => {
-            heroImage.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            heroImage.style.opacity = 1;
-            heroImage.style.transform = 'translateY(0)';
+            heroImage.style.transition = 'opacity 0.8s ease, transform 0.8s ease'; // Smooth transition
+            heroImage.style.opacity = 1; // Show image
+            heroImage.style.transform = 'translateY(0)'; // Move image down
 
             // Trigger text animation after image
             setTimeout(() => {
-                heroText.style.transition = 'opacity 0.8s ease';
-                heroText.style.opacity = 1;
-            }, 400); // Delay for text fade-in
-        }, 200); // Delay for image drop-in
+                heroText.style.transition = 'opacity 0.8s ease'; // Smooth transition
+                heroText.style.opacity = 1; // Show text
+            }, 800); // Delay for text fade-in
+        }, 600); // Delay for image drop-in
     }
 }
 

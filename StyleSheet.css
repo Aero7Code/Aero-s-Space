@@ -234,42 +234,42 @@ nav a:hover {
 
 /* Hero Image Section */
 #hero-image-section {
-    text-align: center;
-    margin: 50px 0;
+    text-align: center; /* Center align content */
+    margin: 50px 0; /* Add space above and below */
     position: relative;
 }
 
 .hero-image-container {
     position: relative;
     display: inline-block;
-    width: 100%;
-    max-width: 800px;
+    width: 100%; /* Ensure full width */
+    max-width: 400px; /* Adjust image container width */
     margin: 0 auto;
 }
 
 .hero-image {
-    width: 100%;
-    height: auto;
+    width: 100%; /* Ensure image fills container */
+    height: auto; /* Maintain aspect ratio */
     border-radius: 10px; /* Optional: Rounded corners */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 .hero-text {
     position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: white;
+    bottom: 20px; /* Position text near the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /
+    text-align: center; /
+    color: white; /* Text color */
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); /* Text shadow for visibility */
 }
 
 .hero-title {
-    font-size: 2em;
+    font-size: 2em; /* Adjust font size */
     margin: 0;
 }
 
 .hero-caption {
-    font-size: 1.2em;
+    font-size: 1.2em; /* Adjust font size */
     margin: 5px 0 0;
 }
