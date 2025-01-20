@@ -50,6 +50,11 @@ function initDropdown() {
     let escapeTimer;
     let isEscaping = false;
 
+    if (!dropdown || !dropdownContent || !dropbtn) {
+        console.warn('Dropdown elements not found. Skipping initialization.');
+        return;
+    }
+
     // Hover event on dropdown button to start the escape timer
     dropbtn.addEventListener('mouseenter', () => {
         if (!isEscaping) {
@@ -64,18 +69,19 @@ function initDropdown() {
         isEscaping = false; // Reset escaping flag
     });
 
-    // Close dropdown if clicked outside
-    document.addEventListener('click', (event) => {
-        if (!dropdown.contains(event.target)) {
-            dropdownContent.style.display = 'none'; // Hide dropdown content
-            clearTimeout(escapeTimer); // Clear escape timer when menu closes
-        }
+     
+    // Toggle dropdown visibility on button click
+     dropbtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isVisible = dropdownContent.style.display === 'block';
+        dropdownContent.style.display = isVisible ? 'none' : 'block';
     });
 
-    dropdown.addEventListener('click', (event) => {
-        const isDisplayed = dropdownContent.style.display === 'block';
-        dropdownContent.style.display = isDisplayed ? 'none' : 'block';
-        event.stopPropagation(); // Prevent immediate closing
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!dropdown.contains(event.target)) {
+            dropdownContent.style.display = 'none';
+        }
     });
 }
 
