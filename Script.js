@@ -47,10 +47,13 @@ function initDropdown() {
     const dropdown = document.querySelector('.dropdown');
     const dropdownContent = document.querySelector('.dropdown-content');
 
+    let escapeTimer;
+
     // Close dropdown if clicked outside
     document.addEventListener('click', (event) => {
         if (!dropdown.contains(event.target)) {
             dropdownContent.style.display = 'none';
+            clearTimeout(escapeTimer); // Clear escape timer when menu closes
         }
     });
 
@@ -58,7 +61,43 @@ function initDropdown() {
         const isDisplayed = dropdownContent.style.display === 'block';
         dropdownContent.style.display = isDisplayed ? 'none' : 'block';
         event.stopPropagation(); // Prevent immediate closing
+
+        if (!isDisplayed) {
+            startEscapeTimer(dropdownContent);
+        }
     });
+}
+
+// Function to start the escape timer
+function startEscapeTimer(dropdownContent) {
+    const menuItems = dropdownContent.querySelectorAll('a');
+    let timeout = 3000; // Time (in ms) before items start escaping
+
+    setTimeout(() => {
+        menuItems.forEach((item) => {
+            makeItemEscape(item);
+        });
+    }, timeout);
+}
+
+// Function to make menu items escape and bounce around
+function makeItemEscape(item) {
+    item.style.position = 'absolute';
+    item.style.transition = 'all 0.5s ease';
+    let screenWidth = window.innerWidth;
+    let screenHeight = window.innerHeight;
+
+    function moveItem() {
+        let randomX = Math.random() * (screenWidth - item.offsetWidth);
+        let randomY = Math.random() * (screenHeight - item.offsetHeight);
+        item.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    moveItem(); // Initial move
+
+    setInterval(() => {
+        moveItem();
+    }, 2000); // Repeat movement every 2 seconds
 }
 
 // Function to animate hero section
