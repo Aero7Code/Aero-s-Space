@@ -124,6 +124,18 @@ function makeItemEscape(item) {
     item.style.pointerEvents = 'auto';
 }
 
+// Scroll event listener to detect scrolling
+window.addEventListener('scroll', function() {
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop;  // Get current scroll position
+
+    console.log(`Current scroll position: ${scrollPosition}`);
+
+    // You can use the scroll position to trigger something
+    if (scrollPosition > 100) {
+        console.log("You've scrolled more than 100px!");
+    }
+});
+
 
 // Function to animate hero section
 function animateHeroSection() {
