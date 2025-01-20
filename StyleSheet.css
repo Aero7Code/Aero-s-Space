@@ -14,6 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure footer stays at the bottom */
+    height: 100%;
 }
 
 /* Sticky Header Styling */
@@ -108,34 +109,31 @@ header nav a:hover {
     height: 50px;
 }
 
+/* Ensure the dropdown container is positioned relative */
 .dropdown-content {
-    display: none;
     position: absolute;
-    right: 0;
-    background-color: white; /* Set background color */
-    min-width: 160px;
+    display: none;
+    background-color: #f1f1f1;  /* Background color for the dropdown */
+    min-width: 160px;  /* Adjust as needed */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    border-radius: 5px;
-    animation: slideInDropdown 0.5s ease-in-out;
+    z-index: 1;
 }
 
+/* Style for individual menu items */
 .dropdown-content a {
-    color: black; /* Set text color */
-    padding: 10px 15px;
+    color: black;
+    padding: 12px 16px;
     text-decoration: none;
-    display: block; /* Ensure links stack vertically */
-    border-bottom: 1px solid #ddd;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
     display: block;
+    transition: background-color 0.3s;
 }
 
+/* Change background color on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/*slide in dropdown animation*/
 .dropdown-content {
     display: none;
     position: absolute;
@@ -146,6 +144,29 @@ header nav a:hover {
     z-index: 1000;
     border-radius: 5px;
     animation: slideInDropdown 0.5s ease-in-out;
+}
+
+/* Ensure all escaping items have position: absolute */
+.dropdown-content a.escaping {
+    position: absolute;  /* Allow items to move around */
+    pointer-events: auto; /* Make sure the items are still clickable */
+    transition: transform 0.6s ease, top 0.6s ease, left 0.6s ease;  /* Smooth transition */
+    z-index: 10;  /* Ensure the items are on top of other content */
+    animation: bounce 1s ease infinite;
+}
+
+/* Prevent items from moving outside the screen */
+body {
+    position: relative;  /* Allow absolute positioning inside body */
+    overflow: hidden;    /* Prevent any scrolling */
+    height: 100%;
+    margin: 0;
+}
+
+/* Optional: Set some space around the page for better visibility of moving items */
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 /* Content Overlay */
@@ -157,6 +178,14 @@ header nav a:hover {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     animation: slideIn 1s ease-in-out;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    20% { transform: translateY(-10px); }
+    40% { transform: translateY(0); }
+    60% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
 }
 
 /* Page Content Animation */

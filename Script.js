@@ -32,12 +32,36 @@ async function loadHeader(container) {
     }
 }
 
+// Function to load the header content
+async function loadHeader(container) {
+    try {
+        const response = await fetch('header.html', {
+            method: 'GET',
+            headers: { 'Content-Type': 'text/html' },
+            credentials: 'include',
+        });
+
+        if (!response.ok) throw new Error(`Header file not found. Status: ${response.status}`);
+
+        const data = await response.text();
+        container.innerHTML = data;
+
+        console.log('Header content loaded successfully.');
+
+        initDropdown(); // Initialize dropdown functionality
+    } catch (error) {
+        console.error('Error loading header:', error);
+        container.innerHTML = `<p>Failed to load header. Please try again later.</p>`;
+    }
+}
+
 // Initialize dropdown functionality
 function initDropdown() {
     const dropdown = document.querySelector('.dropdown');
     const dropdownContent = document.querySelector('.dropdown-content');
     const dropbtn = document.querySelector('.dropbtn');
     let escapeTimer;
+    let visibilityTimer;
 
     if (!dropdown || !dropdownContent || !dropbtn) {
         console.warn('Dropdown elements not found. Skipping initialization.');
@@ -47,14 +71,16 @@ function initDropdown() {
     // Function to open the dropdown
     function openDropdown() {
         dropdownContent.style.display = 'block';
-        clearTimeout(escapeTimer); // Clear any existing timer
-        startEscapeTimer(dropdownContent); // Start the escape timer
+        clearTimeout(escapeTimer); // Clear any existing escape timer
+        clearTimeout(visibilityTimer); // Clear any existing visibility timer
+        startVisibilityTimer(dropdownContent); // Start the visibility timer when dropdown opens
     }
 
     // Function to close the dropdown
     function closeDropdown() {
         dropdownContent.style.display = 'none';
-        clearTimeout(escapeTimer); // Clear the timer when the dropdown closes
+        clearTimeout(escapeTimer); // Clear the escape timer when dropdown closes
+        clearTimeout(visibilityTimer); // Clear the visibility timer when dropdown closes
     }
 
     // Click event to toggle dropdown
@@ -67,7 +93,7 @@ function initDropdown() {
         }
     });
 
-    // Hover events to handle dropdown open and escape timer
+    // Hover events to handle dropdown open and close
     dropbtn.addEventListener('mouseenter', openDropdown);
     dropdown.addEventListener('mouseleave', closeDropdown);
 
@@ -79,16 +105,16 @@ function initDropdown() {
     });
 }
 
-
-// Function to start the escape timer
-function startEscapeTimer(dropdownContent) {
+// Function to start the visibility timer
+function startVisibilityTimer(dropdownContent) {
     const menuItems = dropdownContent.querySelectorAll('a'); // Get all menu items
-    const escapeDelay = 5000; // Time in milliseconds before escape starts, 1000ms = 1s
+    const visibilityDelay = 5000; // 5 seconds before the items start moving
 
-    clearTimeout(escapeTimer); // Prevent multiple timers
-    escapeTimer = setTimeout(() => {
+    visibilityTimer = setTimeout(() => {
         menuItems.forEach(makeItemEscape);
-    }, escapeDelay); // Start escape after delay
+        // Pause the timer, keep items bouncing
+        clearTimeout(visibilityTimer);
+    }, visibilityDelay);
 }
 
 // Function to make menu items escape and bounce around
@@ -97,7 +123,7 @@ function makeItemEscape(item) {
     item.style.transition = 'transform 0.6s ease, top 0.6s ease, left 0.6s ease';
 
     function moveItem() {
-        const randomX = Math.random() * (window.innerWidth - item.offsetWidth); 
+        const randomX = Math.random() * (window.innerWidth - item.offsetWidth);
         const randomY = Math.random() * (window.innerHeight - item.offsetHeight);
         item.style.transform = `translate(${randomX}px, ${randomY}px)`;
     }
@@ -105,7 +131,11 @@ function makeItemEscape(item) {
     moveItem();
     clearInterval(item.escapeInterval); // Prevent multiple intervals
     item.escapeInterval = setInterval(moveItem, 2000); // Move item every 2 seconds
+
+    // Ensure the item remains clickable by resetting its position each time
+    item.style.pointerEvents = 'auto';
 }
+
 
 // Function to animate hero section
 function animateHeroSection() {
