@@ -44,53 +44,67 @@ function initDropdown() {
         return;
     }
 
+    // Function to open the dropdown
+    function openDropdown() {
+        dropdownContent.style.display = 'block';
+        clearTimeout(escapeTimer); // Clear any existing timer
+        startEscapeTimer(dropdownContent); // Start the escape timer
+    }
+
+    // Function to close the dropdown
+    function closeDropdown() {
+        dropdownContent.style.display = 'none';
+        clearTimeout(escapeTimer); // Clear the timer when the dropdown closes
+    }
+
+    // Click event to toggle dropdown
     dropbtn.addEventListener('click', (event) => {
         event.stopPropagation();
-        dropdownContent.style.display =
-            dropdownContent.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!dropdown.contains(event.target)) {
-            dropdownContent.style.display = 'none';
+        if (dropdownContent.style.display === 'block') {
+            closeDropdown();
+        } else {
+            openDropdown();
         }
     });
 
-    dropbtn.addEventListener('mouseenter', () => {
-        clearTimeout(escapeTimer);
-        startEscapeTimer(dropdownContent);
-    });
+    // Hover events to handle dropdown open and escape timer
+    dropbtn.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', closeDropdown);
 
-    dropbtn.addEventListener('mouseleave', () => {
-        clearTimeout(escapeTimer);
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!dropdown.contains(event.target)) {
+            closeDropdown();
+        }
     });
 }
 
+
 // Function to start the escape timer
 function startEscapeTimer(dropdownContent) {
-    const menuItems = dropdownContent.querySelectorAll('a');
-    let timeout = 10;
+    const menuItems = dropdownContent.querySelectorAll('a'); // Get all menu items
+    const escapeDelay = 5000; // Time in milliseconds before escape starts, 1000ms = 1s
 
     clearTimeout(escapeTimer); // Prevent multiple timers
     escapeTimer = setTimeout(() => {
         menuItems.forEach(makeItemEscape);
-    }, timeout);
+    }, escapeDelay); // Start escape after delay
 }
 
 // Function to make menu items escape and bounce around
 function makeItemEscape(item) {
-    item.style.position = 'absolute';
-    item.style.transition = 'all 0.5s ease';
+    item.style.position = 'absolute'; // Set position to absolute
+    item.style.transition = 'transform 0.6s ease, top 0.6s ease, left 0.6s ease';
 
     function moveItem() {
-        const randomX = Math.random() * (window.innerWidth - item.offsetWidth);
+        const randomX = Math.random() * (window.innerWidth - item.offsetWidth); 
         const randomY = Math.random() * (window.innerHeight - item.offsetHeight);
         item.style.transform = `translate(${randomX}px, ${randomY}px)`;
     }
 
     moveItem();
     clearInterval(item.escapeInterval); // Prevent multiple intervals
-    item.escapeInterval = setInterval(moveItem, 2000);
+    item.escapeInterval = setInterval(moveItem, 2000); // Move item every 2 seconds
 }
 
 // Function to animate hero section
@@ -150,3 +164,4 @@ if (contactForm) {
         }
     });
 }
+
