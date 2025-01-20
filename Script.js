@@ -9,28 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('Website is loaded and ready!');
 });
 
-// Function to load the header content
-async function loadHeader(container) {
-    try {
-        const response = await fetch('header.html', {
-            method: 'GET',
-            headers: { 'Content-Type': 'text/html' },
-            credentials: 'include',
-        });
-
-        if (!response.ok) throw new Error(`Header file not found. Status: ${response.status}`);
-
-        const data = await response.text();
-        container.innerHTML = data;
-
-        console.log('Header content loaded successfully.');
-
-        initDropdown(); // Initialize dropdown functionality
-    } catch (error) {
-        console.error('Error loading header:', error);
-        container.innerHTML = `<p>Failed to load header. Please try again later.</p>`;
-    }
-}
 
 // Function to load the header content
 async function loadHeader(container) {
@@ -102,6 +80,16 @@ function initDropdown() {
         if (!dropdown.contains(event.target)) {
             closeDropdown();
         }
+
+        // Optionally, toggle the dropdown when the button is clicked
+    dropbtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (dropdownContent.style.display === 'block') {
+            closeDropdown();
+        } else {
+            openDropdown();
+        }
+    });
     });
 }
 
