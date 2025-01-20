@@ -44,10 +44,25 @@ async function loadHeader(container) {
 
 // Initialize dropdown functionality
 function initDropdown() {
-    const dropdown = document.querySelector('.dropdown');
-    const dropdownContent = document.querySelector('.dropdown-content');
-
+    const dropdown = document.querySelector('.dropdown'); // Dropdown container
+    const dropdownContent = document.querySelector('.dropdown-content'); // Dropdown content
+    const dropbtn = document.querySelector('.dropbtn'); // Dropdown button
     let escapeTimer;
+    let isEscaping = false;
+
+    // Hover event on dropdown button to start the escape timer
+    dropbtn.addEventListener('mouseenter', () => {
+        if (!isEscaping) {
+            isEscaping = true;
+            startEscapeTimer(dropdownContent);
+        }
+    });
+
+    // Clear escape timer on hover out
+    dropbtn.addEventListener('mouseleave', () => {
+        clearTimeout(escapeTimer);
+        isEscaping = false;
+    });
 
     // Close dropdown if clicked outside
     document.addEventListener('click', (event) => {
@@ -61,19 +76,15 @@ function initDropdown() {
         const isDisplayed = dropdownContent.style.display === 'block';
         dropdownContent.style.display = isDisplayed ? 'none' : 'block';
         event.stopPropagation(); // Prevent immediate closing
-
-        if (!isDisplayed) {
-            startEscapeTimer(dropdownContent);
-        }
     });
 }
 
 // Function to start the escape timer
 function startEscapeTimer(dropdownContent) {
-    const menuItems = dropdownContent.querySelectorAll('a');
+    const menuItems = dropdownContent.querySelectorAll('a'); // Get all menu items
     let timeout = 300; // Time (in ms) before items start escaping
 
-    setTimeout(() => {
+    escapeTimer = setTimeout(() => {
         menuItems.forEach((item) => {
             makeItemEscape(item);
         });
