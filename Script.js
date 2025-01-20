@@ -121,8 +121,8 @@ function animateHeroSection() {
             setTimeout(() => {
                 heroText.style.transition = 'opacity 0.8s ease'; // Smooth transition
                 heroText.style.opacity = 1; // Show text
-            }, 800); // Delay for text fade-in
-        }, 600); // Delay for image drop-in
+            }, 1600); // Delay for text fade-in
+        }, 12000); // Delay for image drop-in
     }
 }
 
