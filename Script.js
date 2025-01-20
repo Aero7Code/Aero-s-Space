@@ -71,7 +71,7 @@ function initDropdown() {
 // Function to start the escape timer
 function startEscapeTimer(dropdownContent) {
     const menuItems = dropdownContent.querySelectorAll('a');
-    let timeout = 3000; // Time (in ms) before items start escaping
+    let timeout = 300; // Time (in ms) before items start escaping
 
     setTimeout(() => {
         menuItems.forEach((item) => {
