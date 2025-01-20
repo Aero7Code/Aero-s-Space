@@ -5,10 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     animateHeroSection();
-
     console.log('Website is loaded and ready!');
 });
-
 
 // Function to load the header content
 async function loadHeader(container) {
@@ -25,7 +23,6 @@ async function loadHeader(container) {
         container.innerHTML = data;
 
         console.log('Header content loaded successfully.');
-
         initDropdown(); // Initialize dropdown functionality
     } catch (error) {
         console.error('Error loading header:', error);
@@ -46,22 +43,17 @@ function initDropdown() {
         return;
     }
 
-    // Function to open the dropdown
     function openDropdown() {
         dropdownContent.style.display = 'block';
-        clearTimeout(escapeTimer); // Clear any existing escape timer
-        clearTimeout(visibilityTimer); // Clear any existing visibility timer
-        startVisibilityTimer(dropdownContent); // Start the visibility timer when dropdown opens
+        clearTimeout(escapeTimer); // Clear escape timer
+        startVisibilityTimer(dropdownContent); // Start visibility timer
     }
 
-    // Function to close the dropdown
     function closeDropdown() {
         dropdownContent.style.display = 'none';
-        clearTimeout(escapeTimer); // Clear the escape timer when dropdown closes
-        clearTimeout(visibilityTimer); // Clear the visibility timer when dropdown closes
+        clearTimeout(visibilityTimer); // Clear visibility timer
     }
 
-    // Click event to toggle dropdown
     dropbtn.addEventListener('click', (event) => {
         event.stopPropagation();
         if (dropdownContent.style.display === 'block') {
@@ -71,43 +63,30 @@ function initDropdown() {
         }
     });
 
-    // Hover events to handle dropdown open and close
     dropbtn.addEventListener('mouseenter', openDropdown);
     dropdown.addEventListener('mouseleave', closeDropdown);
 
-    // Close dropdown when clicking outside
     document.addEventListener('click', (event) => {
         if (!dropdown.contains(event.target)) {
             closeDropdown();
         }
-
-        // Optionally, toggle the dropdown when the button is clicked
-    dropbtn.addEventListener('click', (event) => {
-        event.stopPropagation();
-        if (dropdownContent.style.display === 'block') {
-            closeDropdown();
-        } else {
-            openDropdown();
-        }
-    });
     });
 }
 
 // Function to start the visibility timer
 function startVisibilityTimer(dropdownContent) {
-    const menuItems = dropdownContent.querySelectorAll('a'); // Get all menu items
-    const visibilityDelay = 5000; // 5 seconds before the items start moving
+    const menuItems = dropdownContent.querySelectorAll('a');
+    const visibilityDelay = 5000;
 
     visibilityTimer = setTimeout(() => {
         menuItems.forEach(makeItemEscape);
-        // Pause the timer, keep items bouncing
-        clearTimeout(visibilityTimer);
+        clearTimeout(visibilityTimer); // Pause the timer
     }, visibilityDelay);
 }
 
 // Function to make menu items escape and bounce around
 function makeItemEscape(item) {
-    item.style.position = 'absolute'; // Set position to absolute
+    item.style.position = 'absolute';
     item.style.transition = 'transform 0.6s ease, top 0.6s ease, left 0.6s ease';
 
     function moveItem() {
@@ -117,25 +96,20 @@ function makeItemEscape(item) {
     }
 
     moveItem();
-    clearInterval(item.escapeInterval); // Prevent multiple intervals
-    item.escapeInterval = setInterval(moveItem, 2000); // Move item every 2 seconds
-
-    // Ensure the item remains clickable by resetting its position each time
+    clearInterval(item.escapeInterval);
+    item.escapeInterval = setInterval(moveItem, 2000);
     item.style.pointerEvents = 'auto';
 }
 
 // Scroll event listener to detect scrolling
 window.addEventListener('scroll', function() {
-    const scrollPosition = window.scrollY || document.documentElement.scrollTop;  // Get current scroll position
-
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     console.log(`Current scroll position: ${scrollPosition}`);
 
-    // You can use the scroll position to trigger something
     if (scrollPosition > 100) {
         console.log("You've scrolled more than 100px!");
     }
 });
-
 
 // Function to animate hero section
 function animateHeroSection() {
@@ -156,11 +130,11 @@ function animateHeroSection() {
         setTimeout(() => {
             heroText.style.transition = 'opacity 0.6s ease';
             heroText.style.opacity = 1;
-        }, 1600);
-    }, 1200);
+        }, 800);
+    }, 1000);
 }
 
-//* Contact form submission*//
+// Contact form submission
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', async function (e) {
@@ -211,5 +185,3 @@ if (contactForm) {
         }
     });
 }
-
-

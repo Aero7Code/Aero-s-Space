@@ -3,65 +3,47 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('images/Wolf-2.webp'); /* Replace with your image path */
-    background-size: cover; /* Ensure the image covers the entire background */
-    background-repeat: no-repeat; /* Prevent tiling */
-    background-attachment: fixed; /* Keep the image fixed during scrolling */
-    background-position: center; /* Center the image */
-    background-color: #f4f4f9; /* Fallback color if the image fails to load */
+    background-image: url('images/Wolf-2.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
     color: #333;
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure footer stays at the bottom */
-    height: 100%;
+    min-height: 100vh;
 }
 
 /* Sticky Header Styling */
 header,
 #site-header {
-    position: fixed; /* Fix the header to the viewport */
-    top: 0; /* Stick to the top of the screen */
-    left: 0; /* Align to the left edge */
-    width: 100%; /* Ensure it spans the full viewport width */
-    height: 100px; /* Set exact height for the header */
-    background-color: rgba(46, 115, 212, 0.9); /* Slightly opaque for readability */
-    color: white; /* Light text color for contrast */
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Vertically center content */
-    justify-content: space-around; /* Space out items horizontally */
-    padding: 0 30px; /* Add horizontal padding */
-    z-index: 1000; /* Ensure it stays above other elements */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Add a subtle border for separation */
-}
-
-/* Header Content Styling */
-header h1,
-#site-header h1 {
-    margin: 0;
-    font-size: 1.8em; /* Adjust font size for better spacing */
-    white-space: nowrap; /* Prevent text wrapping */
-}
-
-/* Adjust Header Image Size */
-header img,
-#site-header img {
-    height: 100px; /* Exact height for the logo */
-    width: auto; /* Maintain aspect ratio */
-    margin-right: 20px; /* Add spacing between the image and text */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(46, 115, 212, 0.9);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 30px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Navigation Styling within Header */
 header nav {
     display: flex;
-    gap: 15px; /* Add space between navigation items */
+    gap: 15px;
 }
 
 header nav a {
-    color: white; /* Set text color */
-    text-decoration: none; /* Remove underline */
-    font-weight: bold; /* Apply bold font style */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
     font-size: 1em;
     padding: 5px 10px;
     border-radius: 5px;
@@ -69,26 +51,8 @@ header nav a {
 }
 
 header nav a:hover {
-    background-color: rgba(255, 255, 255, 0.3); /* Add hover effect */
-    color: #56bbe0; /* Change text color on hover */
-}
-
-/* Responsive Navigation */
-@media (max-width: 768px) {
-    header nav {
-        flex-direction: column; /* Stack links vertically */
-        align-items: center;
-    }
-
-    header nav a {
-        font-size: 1.2em;
-        padding: 10px;
-    }
-
-    .dropdown-content {
-        min-width: 100%;
-        text-align: center;
-    }
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #56bbe0;
 }
 
 /* Dropdown Menu Styling */
@@ -105,75 +69,14 @@ header nav a:hover {
 }
 
 .menu-icon {
-    width: 50px; /* Adjust icon size */
+    width: 50px;
     height: 50px;
 }
 
-/* Ensure the dropdown container is positioned relative */
 .dropdown-content {
     position: absolute;
     display: none;
-    background-color: #f1f1f1;  /* Background color for the dropdown */
-    min-width: 160px;  /* Adjust as needed */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-/* Style for individual menu items */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s;
-}
-
-/* Show the dropdown when hovering over the parent */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content {
-    position: absolute;
-    z-index: 10; /* Ensure it appears above other elements */
-}
-
-
-/* Style for the items inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s;
-}
-
-/* Hover effect for items */
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/* Optional: Style for the button */
-.dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-/* Change background color on hover */
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/*slide in dropdown animation*/
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: white; /* Set background color */
+    background-color: #f1f1f1;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1000;
@@ -181,53 +84,26 @@ header nav a:hover {
     animation: slideInDropdown 0.5s ease-in-out;
 }
 
-/* Ensure all escaping items have position: absolute */
-.dropdown-content a.escaping {
-    position: absolute;  /* Allow items to move around */
-    pointer-events: auto; /* Make sure the items are still clickable */
-    transition: transform 0.6s ease, top 0.6s ease, left 0.6s ease;  /* Smooth transition */
-    z-index: 10;  /* Ensure the items are on top of other content */
-    animation: bounce 1s ease infinite;
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s;
 }
 
-/* Prevent items from moving outside the screen */
-body {
-    position: relative;  /* Allow absolute positioning inside body */
-    overflow: hidden;    /* Prevent any scrolling */
-    height: 100%;
-    margin: 0;
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
-/* Optional: Set some space around the page for better visibility of moving items */
-html, body {
-    height: 100%;
-    margin: 0;
+.dropdown-content a:hover {
+    background-color: #ddd;
 }
 
-/* Content Overlay */
-.content-overlay {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 1200px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    animation: slideIn 1s ease-in-out;
-}
-
-@keyframes bounce {
-    0% { transform: translateY(0); }
-    20% { transform: translateY(-10px); }
-    40% { transform: translateY(0); }
-    60% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
-}
-
-/* Page Content Animation */
-@keyframes slideIn {
+@keyframes slideInDropdown {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(-10px);
     }
     to {
         opacity: 1;
@@ -235,146 +111,11 @@ html, body {
     }
 }
 
-/* Smooth scrolling behavior for anchor links */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Custom scrollbar for the entire page */
-::-webkit-scrollbar {
-    width: 12px;  /* Set the width of the scrollbar */
-}
-
-/* Track of the scrollbar */
-::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-}
-
-/* Handle of the scrollbar */
-::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
-}
-
-/* Main Content Styling */
+/* Page Content Styling */
 main {
-    padding: 140px 20px 20px; /* Offset to prevent overlap with sticky header */
+    flex-grow: 1;
+    padding: 140px 20px 20px;
     text-align: left;
-    flex: 1; /* Ensures footer is pushed to the bottom for short content */
-}
-
-/* Additional Styling */
-h2 {
-    color: #1a0f7e;
-}
-
-h3 {
-    color: #b40f0f;
-}
-
-h4 {
-    color: #db112c;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-ul li:last-child {
-    border-bottom: none;
-}
-
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-form input,
-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-form button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background: #6c63ff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-}
-
-form button:hover {
-    background: #5754d8;
-}
-
-/* Hero Image Section */
-#hero-image-section {
-    text-align: center; /* Center align content */
-    margin: 50px 0; /* Add space above and below */
-    position: relative;
-}
-
-.hero-image-container {
-    position: relative;
-    display: inline-block;
-    width: 100%; /* Ensure full width */
-    max-width: 400px; /* Adjust image container width */
-    margin: 0 auto;
-}
-
-.hero-image {
-    width: 100%; /* Ensure image fills container */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 10px; /* Optional: Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-}
-
-.hero-text {
-    position: absolute;
-    bottom: 20px; /* Position text near the bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%);
-    text-align: center;
-    color: white; /* Text color */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); /* Text shadow for visibility */
-    animation: fadeInText 1s ease-in-out;
-}
-
-@keyframes fadeInText {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 /* Footer */
