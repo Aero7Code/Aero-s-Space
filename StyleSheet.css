@@ -111,12 +111,13 @@ header nav a:hover {
 .dropdown-content {
     display: none;
     position: absolute;
-    right: 0; /* Align to the right edge */
+    right: 0;
     background-color: white;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     border-radius: 5px;
+    animation: slideInDropdown 0.5s ease-in-out;
 }
 
 .dropdown-content a {
@@ -135,27 +136,16 @@ header nav a:hover {
     display: block;
 }
 
-/* Content Overlay */
-.content-overlay {
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 1200px; /* Optional: Limit content width */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    animation: slideIn 1s ease-in-out; /* Page content animation */
-}
-
-/* Page Content Animation */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px); /* Start slightly below */
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0); /* Slide into place */
-    }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border-radius: 5px;
+    animation: slideInDropdown 0.5s ease-in-out;
 }
 
 /* Main Content Styling */

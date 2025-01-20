@@ -2,100 +2,138 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from waitress import serve
 import sqlite3
-import base64
-import os.path
-# Uncomment the following if Gmail API is used
-# from google.oauth2.credentials import Credentials
-# from googleapiclient.discovery import build
-# from googleapiclient.errors import HttpError
+import imaplib
+import email
+from email.header import decode_header
+import logging
+from email.utils import parseaddr
+import os
+from dotenv import load_dotenv
 
-app = Flask(__name__)
+# Load environment variables
+load_dotenv()
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Custom app name
+APP_NAME = "AerosSpace"  # Change this to your desired name
+app = Flask(APP_NAME)  # Create a Flask app
 
 # Allow CORS for specific origins and include credentials support
 CORS(
     app,
-    origins=['http://localhost:3000'],  # Update to match your frontend's origin
+    origins=[os.getenv('CORS_ORIGIN', 'http://localhost:3000')],  # Use environment variable for CORS origin
     supports_credentials=True
 )
 
-# Initialize the database
-DB_FILE = "emails.db"
+# Secure configuration for Database and IMAP
+DB_FILE = os.getenv('DB_FILE')
+if not DB_FILE:
+    raise ValueError("DB_FILE not set in environment variables")
+
 TABLE_NAME = "emails"
+IMAP_SERVER = os.getenv('IMAP_SERVER', 'imap.gmail.com')
+EMAIL_USER = os.getenv('lexyloveonme@gmail.com') # Use environment variable for email user
+EMAIL_PASS = os.getenv('booj auia vqzr urbw') # Use environment variable for email password
+
+if not all([IMAP_SERVER, EMAIL_USER, EMAIL_PASS]):
+    raise ValueError("IMAP_SERVER, EMAIL_USER, or EMAIL_PASS not set in environment variables")
 
 def init_db():
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.execute(f"""
-        CREATE TABLE IF NOT EXISTS {TABLE_NAME} (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            email TEXT,
-            message TEXT
-        )
-    """)
-    conn.commit()
-    conn.close()
-
-# Gmail API Setup (Uncomment and configure if needed)
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
-CREDENTIALS_FILE = 'credentials.json'  # Update this with your Gmail API credentials file
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute(f"""
+            CREATE TABLE IF NOT EXISTS {TABLE_NAME} (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                email TEXT,
+                message TEXT
+            )
+        """)
+        conn.commit()
+        logger.info("Database initialized successfully.")
+    except sqlite3.Error as e:
+        logger.error(f"Database initialization error: {e}")
+    finally:
+        conn.close()
 
 def get_python_labeled_emails():
-    """Fetch emails labeled 'Python' using the Gmail API."""
+    """Fetch emails labeled 'Python' using IMAP."""
     try:
-        creds = Credentials.from_authorized_user_file(CREDENTIALS_FILE, SCOPES)
-        service = build('gmail', 'v1', credentials=creds)
+        conn = imaplib.IMAP4_SSL(IMAP_SERVER)
+        conn.login(EMAIL_USER, EMAIL_PASS)
+        conn.select("inbox")
 
-        # List messages with the label "Python"
-        results = service.users().messages().list(userId='me', labelIds=['Python']).execute()
-        messages = results.get('messages', [])
+        # Search for emails with "Python" in the subject
+        status, messages = conn.search(None, 'SUBJECT "Python"')
+        if status != "OK":
+            logger.warning("No emails found.")
+            return []
 
+        email_ids = messages[0].split()
         collected_data = []
 
-        for message in messages:
-            msg = service.users().messages().get(userId='me', id=message['id']).execute()
-            payload = msg.get('payload', {})
-            headers = payload.get('headers', [])
+        for email_id in email_ids:
+            res, msg_data = conn.fetch(email_id, "(RFC822)")
+            for response_part in msg_data:
+                if isinstance(response_part, tuple):
+                    msg = email.message_from_bytes(response_part[1])
 
-            # Extract name, email, and message content
-            name, email, message_content = None, None, None
+                    # Decode email subject
+                    subject, encoding = decode_header(msg["Subject"])[0]
+                    if isinstance(subject, bytes):
+                        subject = subject.decode(encoding if encoding else "utf-8")
 
-            for header in headers:
-                if header['name'] == 'From':
-                    email_data = header['value']
-                    name = email_data.split('<')[0].strip()
-                    email = email_data.split('<')[1].strip('>')
+                    # Extract sender information
+                    from_ = msg.get("From")
+                    name, sender_email = parseaddr(from_)
 
-            if payload.get('body', {}).get('data'):
-                message_content = base64.urlsafe_b64decode(
-                    payload['body']['data'].encode('UTF-8')
-                ).decode('UTF-8')
+                    # Extract email content
+                    body = ""
+                    if msg.is_multipart():
+                        for part in msg.walk():
+                            content_type = part.get_content_type()
+                            content_disposition = str(part.get("Content-Disposition"))
 
-            if name and email and message_content:
-                collected_data.append((name, email, message_content))
+                            if content_type == "text/plain" and "attachment" not in content_disposition:
+                                body = part.get_payload(decode=True).decode("utf-8")
+                                break
+                    else:
+                        body = msg.get_payload(decode=True).decode("utf-8")
 
+                    if name and sender_email and body:
+                        collected_data.append((name, sender_email, body))
+
+        conn.logout()
         return collected_data
 
-    except HttpError as error:
-        print(f'An error occurred: {error}')
+    except Exception as e:
+        logger.error(f"Error fetching emails: {e}")
         return []
 
-# Save collected emails to the database
 def save_to_db(data):
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.executemany(f"""
-        INSERT INTO {TABLE_NAME} (name, email, message) VALUES (?, ?, ?)
-    """, data)
-    conn.commit()
-    conn.close()
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.executemany(f"""
+            INSERT INTO {TABLE_NAME} (name, email, message) VALUES (?, ?, ?)
+        """, data)
+        conn.commit()
+        logger.info(f"Saved {len(data)} emails to the database.")
+    except sqlite3.Error as e:
+        logger.error(f"Database error: {e}")
+    finally:
+        conn.close()
 
 @app.route('/contact', methods=['POST', 'OPTIONS'])
 def contact():
     if request.method == 'OPTIONS':
         # Handle preflight requests
         response = jsonify({'message': 'CORS preflight handled'})
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+        response.headers.add('Access-Control-Allow-Origin', os.getenv('CORS_ORIGIN', 'http://localhost:3000'))
         response.headers.add('Access-Control-Allow-Methods', 'POST')
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
         response.headers.add('Access-Control-Allow-Credentials', 'true')
@@ -111,14 +149,22 @@ def contact():
     if not name or not email or not message:
         return jsonify({'error': 'Missing fields'}), 400
 
+    if '@' not in parseaddr(email)[1]:
+        return jsonify({'error': 'Invalid email address'}), 400
+
     # Handle the data (e.g., save to a database or send an email)
-    print(f"Message received from {name} ({email}): {message}")
+    logger.info(f"Message received from {name} ({email}): {message}")
 
     return jsonify({'message': 'Your message has been received!'}), 200
 
 @app.route('/sync_emails', methods=['GET'])
 def sync_emails():
     """Sync emails labeled 'Python' to the database."""
+    api_key = request.headers.get('X-API-KEY')
+    if api_key != os.getenv('SYNC_API_KEY', 'default-key'):
+        logger.warning("Unauthorized access to /sync_emails")
+        return jsonify({'error': 'Unauthorized'}), 401
+
     emails = get_python_labeled_emails()
     if not emails:
         return jsonify({'message': 'No new emails found with the label "Python".'}), 200
@@ -128,4 +174,4 @@ def sync_emails():
 
 if __name__ == '__main__':
     init_db()
-    serve(app, host='0.0.0.0', port=5000)
+    serve(app, host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
