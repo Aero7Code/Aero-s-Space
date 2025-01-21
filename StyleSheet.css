@@ -27,6 +27,17 @@ body {
     z-index: 2;
 }
 
+/* Content Overlay */
+.content-overlay {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px; /* Optional: Limit content width */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    animation: slideIn 1s ease-in-out; /* Page content animation */
+}
+
 /* Sticky Header Styling */
 header,
 #site-header {
@@ -112,6 +123,78 @@ header nav a:hover {
     background-color: #ddd;
 }
 
+
+/* Main Content Styling */
+main {
+    padding: 140px 20px 20px; /* Offset to prevent overlap with sticky header */
+    text-align: left;
+    flex: 1; /* Ensures footer is pushed to the bottom for short content */
+}
+
+/* Additional Styling */
+h2 {
+    color: #1a0f7e;
+}
+
+h3 {
+    color: #b40f0f;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #5754d8;
+}
+
+/* Animation Keyframes */
 @keyframes slideInDropdown {
     from {
         opacity: 0;
@@ -120,6 +203,24 @@ header nav a:hover {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    header nav {
+        flex-direction: column; /* Stack links vertically */
+        align-items: center;
+    }
+
+    header nav a {
+        font-size: 1.2em;
+        padding: 10px;
+    }
+
+    .dropdown-content {
+        min-width: 100%;
+        text-align: center;
     }
 }
 
