@@ -95,6 +95,11 @@ h3 {
     color: #b40f0f;
 }
 
+h3 {
+    color: #333;
+
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -150,6 +155,18 @@ form button:hover {
     background: #5754d8;
 }
 
+
+/* Content Overlay */
+.content-overlay {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px; /* Optional: Limit content width */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    animation: slideIn 1s ease-in-out; /* Page content animation */
+}
+
 /* Footer Styling */
 footer {
     background-color: #333;
@@ -185,5 +202,23 @@ nav a:hover {
     }
     to {
         opacity: 1;
+    }
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    header nav {
+        flex-direction: column; /* Stack links vertically */
+        align-items: center;
+    }
+
+    header nav a {
+        font-size: 1.2em;
+        padding: 10px;
+    }
+
+    .dropdown-content {
+        min-width: 100%;
+        text-align: center;
     }
 }
