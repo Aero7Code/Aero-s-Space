@@ -15,7 +15,7 @@ load_dotenv()
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__) 
 
 # Custom app name
 APP_NAME = "AerosSpace"  # Change this to your desired name
@@ -34,9 +34,9 @@ if not DB_FILE:
     raise ValueError("DB_FILE not set in environment variables")
 
 TABLE_NAME = "emails"
-IMAP_SERVER = os.getenv('IMAP_SERVER', 'imap.gmail.com')
-EMAIL_USER = os.getenv('lexyloveonme@gmail.com') # Use environment variable for email user
-EMAIL_PASS = os.getenv('booj auia vqzr urbw') # Use environment variable for email password
+IMAP_SERVER = os.getenv('IMAP_SERVER', 'imap.gmail.com') 
+EMAIL_USER = os.getenv('EMAIL_USER') # Use environment variable for email user
+EMAIL_PASS = os.getenv('EMAIL_PASS') # Use environment variable for email password
 
 if not all([IMAP_SERVER, EMAIL_USER, EMAIL_PASS]):
     raise ValueError("IMAP_SERVER, EMAIL_USER, or EMAIL_PASS not set in environment variables")
@@ -70,7 +70,7 @@ def get_python_labeled_emails():
         # Search for emails with "Python" in the subject
         status, messages = conn.search(None, 'SUBJECT "Python"')
         if status != "OK":
-            logger.warning("No emails found.")
+            logger.warning("No emails found.") 
             return []
 
         email_ids = messages[0].split()
@@ -110,8 +110,8 @@ def get_python_labeled_emails():
         conn.logout()
         return collected_data
 
-    except Exception as e:
-        logger.error(f"Error fetching emails: {e}")
+    except Exception as e: 
+        logger.error(f"Error fetching emails: {e}") 
         return []
 
 def save_to_db(data):
