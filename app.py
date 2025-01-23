@@ -7,6 +7,9 @@ import email
 from email.header import decode_header
 import logging
 from email.utils import parseaddr
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
 
@@ -15,16 +18,16 @@ load_dotenv()
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__) 
+logger = logging.getLogger(__name__)
 
 # Custom app name
-APP_NAME = "AerosSpace"  # Change this to your desired name
-app = Flask(APP_NAME)  # Create a Flask app
+APP_NAME = "AerosSpace"
+app = Flask(APP_NAME)
 
 # Allow CORS for specific origins and include credentials support
 CORS(
     app,
-    origins=[os.getenv('CORS_ORIGIN', 'http://localhost:3000')],  # Use environment variable for CORS origin
+    origins=[os.getenv('CORS_ORIGIN', 'http://localhost:3000')],
     supports_credentials=True
 )
 
@@ -34,12 +37,13 @@ if not DB_FILE:
     raise ValueError("DB_FILE not set in environment variables")
 
 TABLE_NAME = "emails"
-IMAP_SERVER = os.getenv('IMAP_SERVER', 'imap.gmail.com') 
-EMAIL_USER = os.getenv('EMAIL_USER') # Use environment variable for email user
-EMAIL_PASS = os.getenv('EMAIL_PASS') # Use environment variable for email password
+IMAP_SERVER = os.getenv('IMAP_SERVER', 'imap.gmail.com')
+EMAIL_USER = os.getenv('EMAIL_USER')
+EMAIL_PASS = os.getenv('EMAIL_PASS')
 
 if not all([IMAP_SERVER, EMAIL_USER, EMAIL_PASS]):
     raise ValueError("IMAP_SERVER, EMAIL_USER, or EMAIL_PASS not set in environment variables")
+
 
 def init_db():
     try:
@@ -60,6 +64,7 @@ def init_db():
     finally:
         conn.close()
 
+
 def get_python_labeled_emails():
     """Fetch emails labeled 'Python' using IMAP."""
     try:
@@ -70,7 +75,7 @@ def get_python_labeled_emails():
         # Search for emails with "Python" in the subject
         status, messages = conn.search(None, 'SUBJECT "Python"')
         if status != "OK":
-            logger.warning("No emails found.") 
+            logger.warning("No emails found.")
             return []
 
         email_ids = messages[0].split()
@@ -110,9 +115,10 @@ def get_python_labeled_emails():
         conn.logout()
         return collected_data
 
-    except Exception as e: 
-        logger.error(f"Error fetching emails: {e}") 
+    except Exception as e:
+        logger.error(f"Error fetching emails: {e}")
         return []
+
 
 def save_to_db(data):
     try:
@@ -128,6 +134,7 @@ def save_to_db(data):
     finally:
         conn.close()
 
+
 def is_valid_email(email):
     """Helper function to validate email format."""
     try:
@@ -136,10 +143,35 @@ def is_valid_email(email):
     except Exception:
         return False
 
+
+def send_email(to_email, subject, body):
+    """Send an email using SMTP."""
+    from_email = os.getenv('EMAIL_USER')
+    email_password = os.getenv('EMAIL_PASS')
+
+    # Create the email
+    msg = MIMEMultipart()
+    msg['From'] = from_email
+    msg['To'] = to_email
+    msg['Subject'] = subject
+
+    # Attach the body text
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        # Connect to the SMTP server
+        with smtplib.SMTP_SSL(os.getenv('SMTP_SERVER', 'smtp.gmail.com'), int(os.getenv('SMTP_PORT', 465))) as server:
+            server.login(from_email, email_password)
+            server.sendmail(from_email, to_email, msg.as_string())
+            logger.info("Email sent successfully!")
+    except Exception as e:
+        logger.error(f"Error sending email: {e}")
+        raise
+
+
 @app.route('/contact', methods=['POST', 'OPTIONS'])
 def contact():
     if request.method == 'OPTIONS':
-        # Handle preflight requests for CORS
         response = jsonify({'message': 'CORS preflight handled'})
         response.headers.add('Access-Control-Allow-Origin', os.getenv('CORS_ORIGIN', 'http://localhost:3000'))
         response.headers.add('Access-Control-Allow-Methods', 'POST')
@@ -149,7 +181,6 @@ def contact():
 
     data = request.get_json()
 
-    # Validate incoming data
     name = data.get('name')
     email = data.get('email')
     message = data.get('message')
@@ -166,21 +197,25 @@ def contact():
         logger.warning("Validation failed: Message too long")
         return jsonify({'error': 'Message is too long. Maximum allowed is 1000 characters.'}), 400
 
-    # Handle the data (e.g., save to a database or send an email)
     logger.info(f"Message received from {name} ({email}): {message}")
 
     try:
-        # Example: Save to database (optional, replace with actual logic)
-        save_to_db([(name, email, message)])  
+        save_to_db([(name, email, message)])
+
+        send_email(
+            to_email=os.getenv('RECIPIENT_EMAIL', 'your-email@example.com'),
+            subject=f"New Contact Form Submission from {name}",
+            body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+        )
     except Exception as e:
-        logger.error(f"Error saving to database: {e}")
+        logger.error(f"Error handling the contact form submission: {e}")
         return jsonify({'error': 'Internal server error. Please try again later.'}), 500
 
-    return jsonify({'message': 'Your message has been received!'}), 200
+    return jsonify({'message': 'Your message has been sent!'}), 200
+
 
 @app.route('/sync_emails', methods=['GET'])
 def sync_emails():
-    """Sync emails labeled 'Python' to the database."""
     api_key = request.headers.get('X-API-KEY')
     if api_key != os.getenv('SYNC_API_KEY', 'default-key'):
         logger.warning("Unauthorized access to /sync_emails")
@@ -198,6 +233,7 @@ def sync_emails():
     except Exception as e:
         logger.error(f"Error syncing emails: {e}")
         return jsonify({'error': 'Failed to sync emails. Please try again later.'}), 500
+
 
 if __name__ == '__main__':
     init_db()
