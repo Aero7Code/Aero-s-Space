@@ -12,6 +12,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
+import re
 
 # Load environment variables
 load_dotenv()
@@ -40,12 +41,15 @@ TABLE_NAME = "emails"
 IMAP_SERVER = os.getenv('IMAP_SERVER', 'imap.gmail.com')
 EMAIL_USER = os.getenv('EMAIL_USER')
 EMAIL_PASS = os.getenv('EMAIL_PASS')
+SMTP_SERVER = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
+SMTP_PORT = os.getenv('SMTP_PORT', 465)
 
-if not all([IMAP_SERVER, EMAIL_USER, EMAIL_PASS]):
-    raise ValueError("IMAP_SERVER, EMAIL_USER, or EMAIL_PASS not set in environment variables")
+if not all([IMAP_SERVER, EMAIL_USER, EMAIL_PASS, SMTP_SERVER, SMTP_PORT]):
+    raise ValueError("Missing critical environment variables for IMAP/SMTP configuration")
 
 
 def init_db():
+    """Initialize the SQLite database."""
     try:
         conn = sqlite3.connect(DB_FILE)
         cursor = conn.cursor()
@@ -68,11 +72,10 @@ def init_db():
 def get_python_labeled_emails():
     """Fetch emails labeled 'Python' using IMAP."""
     try:
-        conn = imaplib.IMAP4_SSL(IMAP_SERVER)
+        conn = imaplib.IMAP4_SSL(IMAP_SERVER, timeout=10)
         conn.login(EMAIL_USER, EMAIL_PASS)
         conn.select("inbox")
 
-        # Search for emails with "Python" in the subject
         status, messages = conn.search(None, 'SUBJECT "Python"')
         if status != "OK":
             logger.warning("No emails found.")
@@ -87,22 +90,18 @@ def get_python_labeled_emails():
                 if isinstance(response_part, tuple):
                     msg = email.message_from_bytes(response_part[1])
 
-                    # Decode email subject
                     subject, encoding = decode_header(msg["Subject"])[0]
                     if isinstance(subject, bytes):
                         subject = subject.decode(encoding if encoding else "utf-8")
 
-                    # Extract sender information
                     from_ = msg.get("From")
                     name, sender_email = parseaddr(from_)
 
-                    # Extract email content
                     body = ""
                     if msg.is_multipart():
                         for part in msg.walk():
                             content_type = part.get_content_type()
                             content_disposition = str(part.get("Content-Disposition"))
-
                             if content_type == "text/plain" and "attachment" not in content_disposition:
                                 body = part.get_payload(decode=True).decode("utf-8")
                                 break
@@ -121,6 +120,7 @@ def get_python_labeled_emails():
 
 
 def save_to_db(data):
+    """Save email data to the database."""
     try:
         conn = sqlite3.connect(DB_FILE)
         cursor = conn.cursor()
@@ -136,31 +136,24 @@ def save_to_db(data):
 
 
 def is_valid_email(email):
-    """Helper function to validate email format."""
-    try:
-        name, addr = parseaddr(email)
-        return '@' in addr and '.' in addr.split('@')[-1]
-    except Exception:
-        return False
+    """Validate email format using regex."""
+    return re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", email) is not None
 
 
 def send_email(to_email, subject, body):
     """Send an email using SMTP."""
-    from_email = os.getenv('EMAIL_USER')
-    email_password = os.getenv('EMAIL_PASS')
+    from_email = EMAIL_USER
+    email_password = EMAIL_PASS
 
-    # Create the email
     msg = MIMEMultipart()
     msg['From'] = from_email
     msg['To'] = to_email
     msg['Subject'] = subject
 
-    # Attach the body text
     msg.attach(MIMEText(body, 'plain'))
 
     try:
-        # Connect to the SMTP server
-        with smtplib.SMTP_SSL(os.getenv('SMTP_SERVER', 'smtp.gmail.com'), int(os.getenv('SMTP_PORT', 465))) as server:
+        with smtplib.SMTP_SSL(SMTP_SERVER, int(SMTP_PORT), timeout=10) as server:
             server.login(from_email, email_password)
             server.sendmail(from_email, to_email, msg.as_string())
             logger.info("Email sent successfully!")
@@ -233,6 +226,12 @@ def sync_emails():
     except Exception as e:
         logger.error(f"Error syncing emails: {e}")
         return jsonify({'error': 'Failed to sync emails. Please try again later.'}), 500
+
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    """Health check endpoint."""
+    return jsonify({'status': 'ok'}), 200
 
 
 if __name__ == '__main__':

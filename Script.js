@@ -35,13 +35,14 @@ function initDropdown() {
     const dropdown = document.querySelector('.dropdown');
     const dropdownContent = document.querySelector('.dropdown-content');
     const dropbtn = document.querySelector('.dropbtn');
-    let escapeTimer;
-    let visibilityTimer;
 
     if (!dropdown || !dropdownContent || !dropbtn) {
         console.warn('Dropdown elements not found. Skipping initialization.');
         return;
     }
+
+    let escapeTimer;
+    let visibilityTimer;
 
     function openDropdown() {
         dropdownContent.style.display = 'block';
@@ -56,11 +57,7 @@ function initDropdown() {
 
     dropbtn.addEventListener('click', (event) => {
         event.stopPropagation();
-        if (dropdownContent.style.display === 'block') {
-            closeDropdown();
-        } else {
-            openDropdown();
-        }
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
     });
 
     dropbtn.addEventListener('mouseenter', openDropdown);
@@ -80,7 +77,7 @@ function startVisibilityTimer(dropdownContent) {
 
     visibilityTimer = setTimeout(() => {
         menuItems.forEach(makeItemEscape);
-        clearTimeout(visibilityTimer); // Pause the timer
+        clearTimeout(visibilityTimer); // Stop the timer
     }, visibilityDelay);
 }
 
@@ -102,7 +99,7 @@ function makeItemEscape(item) {
 }
 
 // Scroll event listener to detect scrolling
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function () {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     console.log(`Current scroll position: ${scrollPosition}`);
 
@@ -130,8 +127,8 @@ function animateHeroSection() {
         setTimeout(() => {
             heroText.style.transition = 'opacity 0.6s ease';
             heroText.style.opacity = 1;
-        }, 800);
-    }, 1000);
+        }, 1800); // Delay text animation
+    }, 1600); // Delay image animation
 }
 
 // Contact form submission
