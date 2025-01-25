@@ -48,9 +48,9 @@ header,
     height: 100px;
     background-color: rgba(46, 115, 212, 0.9);
     color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    display: flex; /* Align items in the header */
+    align-items: center; /* Center vertically */
+    justify-content: space-around; /* Space between elements */
     padding: 0 30px;
     z-index: 1000;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -228,13 +228,35 @@ form button:hover {
     }
 }
 
-/* Footer */
+/* Footer Styling */
 footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    background-color: var(--footer-bg, #333); /* Use CSS variables for easy customization */
+    color: var(--footer-color, white);       /* Allows quick changes to text color */
+    text-align: var(--footer-text-align, center); /* Easily modify alignment */
+    padding: var(--footer-padding, 0px 20px);    /* Adjustable padding */
+    position: relative;                         /* Can switch to fixed or absolute if needed */
+    bottom: 0;                                  /* Works with fixed or absolute positioning */
+    width: 100%;                                /* Full width by default */
+    border-top: var(--footer-border, none);     /* Optional border */
+    font-size: var(--footer-font-size, 1rem);   /* Customizable font size */
+}
+
+/* Footer Links */
+footer a {
+    color: var(--footer-link-color, lightblue); /* Default link color */
+    text-decoration: var(--footer-link-decoration, none); /* Link underline control */
+    transition: color 0.3s ease;               /* Smooth color transition */
+}
+
+footer a:hover {
+    color: var(--footer-link-hover-color, #ffcc00); /* Change link color on hover */
+    text-decoration: underline;              /* Optional underline on hover */
+}
+
+/* Footer Responsive Styling */
+@media (max-width: 768px) {
+    footer {
+        font-size: var(--footer-font-size-mobile, 0.9rem); /* Smaller text for mobile */
+        padding: var(--footer-padding-mobile, 15px);       /* Adjust padding for mobile */
+    }
 }
