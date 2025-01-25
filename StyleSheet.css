@@ -75,8 +75,8 @@ header nav a {
 }
 
 header nav a:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    color: var(--nav-link-hover-color, #56bbe0);
+    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white on hover */
+    color: var(--nav-link-hover-color, #56bbe0); /* Customizable hover color */
 }
 
 /* General Menu Styling */
@@ -182,10 +182,45 @@ header .menu .menu-item-4:hover {
     padding: 0;
 }
 
+/* Menu Icon Styling */
 .menu-icon {
-    width: 90px;
-    height: 90px;
+    position: var(--menu-icon-position, fixed);  /* Default position type */
+    top: var(--menu-icon-top, auto);            /* Vertical position (set `auto` by default) */
+    right: var(--menu-icon-right, auto);        /* Horizontal position (set `auto` by default) */
+    bottom: var(--menu-icon-bottom, auto);      /* Vertical position (set `auto` by default) */
+    left: var(--menu-icon-left, auto);          /* Horizontal position (set `auto` by default) */
+
+    width: var(--menu-icon-width, 90px);        /* Customizable width */
+    height: var(--menu-icon-height, 90px);      /* Customizable height */
+    background-color: var(--menu-icon-bg, #333); /* Background color */
+    border-radius: var(--menu-icon-radius, 50%); /* Circular or rectangular */
+    display: flex;                              /* Flexbox for alignment */
+    justify-content: center;                    /* Center content horizontally */
+    align-items: center;                        /* Center content vertically */
+    font-size: var(--menu-icon-font-size, 2rem); /* Font size for icon content */
+    color: var(--menu-icon-color, white);       /* Icon color */
+    transition: all 0.3s ease;                  /* Smooth transitions for hover effects */
+    border: var(--menu-icon-border, none);      /* Customizable border */
+    box-shadow: var(--menu-icon-shadow, 0 4px 6px rgba(0, 0, 0, 0.1)); /* Shadow effect */
+    cursor: pointer;                            /* Pointer cursor on hover */
+    z-index: var(--menu-icon-z-index, 1000);    /* Ensure it is on top */
 }
+
+.menu-icon:hover {
+    background-color: var(--menu-icon-hover-bg, #555); /* Hover background */
+    color: var(--menu-icon-hover-color, #ffcc00);      /* Hover icon color */
+    transform: var(--menu-icon-hover-transform, scale(1.1)); /* Scale or rotate on hover */
+}
+
+/* Responsive Adjustments for Menu Icon */
+@media (max-width: 768px) {
+    .menu-icon {
+        width: var(--menu-icon-width-mobile, 70px);   /* Smaller width for mobile */
+        height: var(--menu-icon-height-mobile, 70px); /* Smaller height for mobile */
+        font-size: var(--menu-icon-font-size-mobile, 1.5rem); /* Adjust font size for mobile */
+    }
+}
+
 
 .dropdown-content {
     position: absolute;
