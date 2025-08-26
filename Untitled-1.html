@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Page</title>
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .show-content ~ .dropdown-content {
+            display: none;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Content overlay animation */
+        .content-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.9);
+            display: none;
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: all 0.8s ease-out;
+        }
+
+        .content-overlay.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <!-- Header content will be loaded dynamically -->
+    </header>
+
+    <div class="content-overlay"></div>
+
+    <main role="main">
+        <!-- Your main content goes here -->
+        <section aria-label="About section" class="about-section">
+            <h2>About</h2>
+            <p>Lorem ipsum dolor sit amet...</p>
+        </section>
+
+        <section aria-label="Services section" class="services-section">
+            <h2>Our Services</h2>
+            <!-- Service items here -->
+        </section>
+
+        <!-- Add more sections as needed -->
+    </main>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
