@@ -18,7 +18,7 @@ import re
 load_dotenv()
 
 # Setup logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logg     NFO)
 logger = logging.getLogger(__name__)
 
 # Custom app name

@@ -84,7 +84,7 @@ header .menu {
     display: flex;               /* Flexbox for layout */
     flex-direction: column;      /* Stack menu items vertically */
     gap: 10px;                   /* Spacing between menu items */
-    background-color: #444;      /* Background color for the menu */
+    background-color: #3fb7df;      /* Background color for the menu */
     padding: 10px 15px;          /* Menu padding */
     border-radius: 10px;         /* Rounded corners for menu */
     width: var(--menu-width, 200px); /* Adjustable menu width */
@@ -117,7 +117,7 @@ header .menu .menu-item-2 {
 }
 
 header .menu .menu-item-2:hover {
-    background-color: #444;
+    background-color: #444444;
     color: white;
 }
 
