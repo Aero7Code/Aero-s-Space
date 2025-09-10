@@ -182,7 +182,7 @@ header .menu .menu-item-4:hover {
     padding: 0;
 }
 
-/* Menu Icon Styling - the face*/
+/* Menu Icon Styling - The face*/
 .menu-icon {
     position: var(--menu-icon-position, fixed);  /* Default position type */
     top: var(--menu-icon-top, auto);            /* Vertical position (set `auto` by default) */
@@ -190,8 +190,8 @@ header .menu .menu-item-4:hover {
     bottom: var(--menu-icon-bottom, auto);      /* Vertical position (set `auto` by default) */
     left: var(--menu-icon-left, auto);          /* Horizontal position (set `auto` by default) */
 
-    width: var(--menu-icon-width, 120px);        /* Customizable width */
-    height: var(--menu-icon-height, 120px);      /* Customizable height */
+    width: var(--menu-icon-width, 160px);        /* Customizable width */
+    height: var(--menu-icon-height, 160px);      /* Customizable height */
     background-color: var(--menu-icon-bg, #63b3f8); /* Background color */
     border-radius: var(--menu-icon-radius, 50%); /* Circular or rectangular */
     display: flex;                              /* Flexbox for alignment */
