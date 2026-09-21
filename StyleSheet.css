@@ -1,244 +1,90 @@
-/* General Styling */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('images/Wolf-2.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    color: #599cdf;
+:root {
+    color-scheme: light;
+    font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
-    display: flex;
-    flex-direction: column;
+    color: #1a2d43;
+    background: #10233c;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
     min-height: 100vh;
+    margin: 0;
+    background: #10233c url('images/Wolf-2.webp') center / cover fixed no-repeat;
 }
 
-/* Content Wrapper Styling */
-.content-wrapper {
-    max-width: 1200px; /* Adjust to your desired width */
-    margin: 120px auto 20px; /* Centering with space for the sticky header */
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for elevation */
-    border-radius: 8px; /* Rounded corners */
-    position: relative;
-    z-index: 2;
-}
-
-/* Content Overlay */
-.content-overlay {
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 1200px; /* Optional: Limit content width */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    animation: slideIn 1s ease-in-out; /* Page content animation */
-}
-
-/* Sticky Header Styling */
-header,
 #site-header {
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background-color: rgba(46, 115, 212, 0.9);
-    color: white;
-    display: flex; /* Align items in the header */
-    align-items: center; /* Center vertically */
-    justify-content: space-around; /* Space between elements */
-    padding: 0 30px;
-    z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Navigation Styling */
-header nav {
-    display: flex; /* Horizontal layout for navigation links */
-    gap: 15px;     /* Spacing between navigation links */
+    z-index: 20;
+    display: flex;
     align-items: center;
+    gap: 1rem;
+    min-height: 5.5rem;
+    padding: .75rem max(1rem, calc((100vw - 72rem) / 2));
+    color: #fff;
+    background: rgba(18, 61, 113, .96);
+    border-bottom: 1px solid rgba(255, 255, 255, .28);
+    box-shadow: 0 4px 18px rgba(7, 24, 49, .22);
 }
 
-header nav a {
-    color: var(--nav-link-color, white);  /* Customizable link color */
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1em;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+#site-header h1 {
+    margin: 0;
+    font-size: clamp(1.25rem, 2.5vw, 1.85rem);
+    line-height: 1.2;
 }
 
-header nav a:hover {
-    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white on hover */
-    color: var(--nav-link-hover-color, #56bbe0); /* Hover color */
+.site-status {
+    margin: 0;
+    padding: .3rem .65rem;
+    color: #fff;
+    font-size: .875rem;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 999px;
 }
 
-/* General Menu Styling */
-header .menu {
-    display: flex;               /* Flexbox for layout */
-    flex-direction: column;      /* Stack menu items vertically */
-    gap: 10px;                   /* Spacing between menu items */
-    background-color: #3fb7df;      /* Background color for the menu */
-    padding: 10px 15px;          /* Menu padding */
-    border-radius: 10px;         /* Rounded corners for menu */
-    width: var(--menu-width, 200px); /* Adjustable menu width */
+#site-header nav {
+    margin-left: auto;
 }
 
-/* Styling for Each Menu Item */
-header .menu .menu-item-1 {
-    color: white;
-    background-color: #333;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-/* Hover effect for menu item 1 */
-header .menu .menu-item-1:hover { 
-    background-color: #555;
-    color: #ffcc00;
-}
-
-header .menu .menu-item-2 {
-    color: #56bbe0;
-    background-color: #222;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-style: italic;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-header .menu .menu-item-2:hover {
-    background-color: #444444;
-    color: white;
-}
-
-header .menu .menu-item-3 {
-    color: #ff9900;
-    background-color: #111;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1rem;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-header .menu .menu-item-3:hover {
-    background-color: #333;
-    color: #56bbe0;
-}
-
-header .menu .menu-item-4 {
-    color: white;
-    background-color: #666;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-header .menu .menu-item-4:hover {
-    background-color: #888;
-    color: black;
-}
-
-/* Responsive Styling for Menu */
-@media (max-width: 768px) {
-    header .menu {
-        width: 100%;             /* Menu takes full width on smaller screens */
-        gap: 5px;                /* Reduced spacing for compact view */
-        padding: 5px 10px;
-    }
-
-    header .menu .menu-item-1,
-    header .menu .menu-item-2,
-    header .menu .menu-item-3,
-    header .menu .menu-item-4 {
-        font-size: 0.9rem;       /* Smaller font size for mobile */
-        padding: 6px 10px;
-    }
-}
-
-
-/* Dropdown Menu Styling */
 .dropdown {
     position: relative;
-    display: inline-block;
 }
 
 .dropbtn {
-    background: none;
-    border: none;
+    display: block;
+    padding: .15rem;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
     cursor: pointer;
-    padding: 0;
 }
 
-/* Menu Icon Styling - The face*/
 .menu-icon {
-    position: var(--menu-icon-position, fixed);  /* Default position type */
-    top: var(--menu-icon-top, auto);            /* Vertical position (set `auto` by default) */
-    right: var(--menu-icon-right, auto);        /* Horizontal position (set `auto` by default) */
-    bottom: var(--menu-icon-bottom, auto);      /* Vertical position (set `auto` by default) */
-    left: var(--menu-icon-left, auto);          /* Horizontal position (set `auto` by default) */
-
-    width: var(--menu-icon-width, 160px);        /* Customizable width */
-    height: var(--menu-icon-height, 160px);      /* Customizable height */
-    background-color: var(--menu-icon-bg, #63b3f8); /* Background color */
-    border-radius: var(--menu-icon-radius, 50%); /* Circular or rectangular */
-    display: flex;                              /* Flexbox for alignment */
-    justify-content: center;                    /* Center content horizontally */
-    align-items: center;                        /* Center content vertically */
-    font-size: var(--menu-icon-font-size, 2rem); /* Font size for icon content */
-    color: var(--menu-icon-color, white);       /* Icon color */
-    transition: all 0.3s ease;                  /* Smooth transitions for hover effects */
-    border: var(--menu-icon-border, none);      /* Customizable border */
-    box-shadow: var(--menu-icon-shadow, 0 4px 6px rgba(0, 0, 0, 0.1)); /* Shadow effect */
-    cursor: pointer;                            /* Pointer cursor on hover */
-    z-index: var(--menu-icon-z-index, 1000);    /* Ensure it is on top */
+    display: block;
+    width: 3.4rem;
+    height: 3.4rem;
+    padding: .35rem;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
 }
-
-.menu-icon:hover {
-    background-color: var(--menu-icon-hover-bg, #489ecd); /* Hover background */
-    color: var(--menu-icon-hover-color, #ffcc00);      /* Hover icon color */
-    transform: var(--menu-icon-hover-transform, scale(1.1)); /* Scale or rotate on hover */
-}
-
-/* Responsive Adjustments for Menu Icon */
-@media (max-width: 768px) {
-    .menu-icon {
-        width: var(--menu-icon-width-mobile, 70px);   /* Smaller width for mobile */
-        height: var(--menu-icon-height-mobile, 70px); /* Smaller height for mobile */
-        font-size: var(--menu-icon-font-size-mobile, 1.5rem); /* Adjust font size for mobile */
-    }
-}
-
 
 .dropdown-content {
     position: absolute;
+    top: calc(100% + .5rem);
+    right: 0;
     display: block;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    border-radius: 5px;
-    animation: slideInDropdown 0.5s ease-in-out;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s;
+    min-width: 12rem;
+    padding: .35rem;
+    background: #fff;
+    border: 1px solid #bfd0e3;
+    border-radius: .7rem;
+    box-shadow: 0 12px 28px rgba(8, 30, 56, .25);
 }
 
 .js .dropdown-content {
@@ -249,150 +95,232 @@ header .menu .menu-item-4:hover {
     display: block;
 }
 
-.dropdown-content a:hover {
-    background-color: #ddd;
+.dropdown-content a {
+    display: block;
+    padding: .65rem .8rem;
+    color: #153e6b;
+    text-decoration: none;
+    border-radius: .4rem;
 }
 
+.dropdown-content a:hover,
+.dropdown-content a[aria-current="page"] {
+    background: #e6f1fb;
+}
 
-/* Main Content Styling */
+.dropbtn:focus-visible,
+.dropdown-content a:focus-visible,
+form :focus-visible {
+    outline: 3px solid #f3b42c;
+    outline-offset: 3px;
+}
+
+.content-overlay {
+    width: min(72rem, calc(100% - 2rem));
+    margin: clamp(1rem, 3vw, 2rem) auto;
+    overflow: hidden;
+    background: rgba(251, 253, 255, .95);
+    border: 1px solid rgba(255, 255, 255, .75);
+    border-radius: 1rem;
+    box-shadow: 0 18px 45px rgba(2, 14, 32, .35);
+    animation: slideIn .45s ease-out;
+}
+
 main {
-    padding: 140px 20px 20px; /* Offset to prevent overlap with sticky header */
-    text-align: left;
-    flex: 1; /* Ensures footer is pushed to the bottom for short content */
+    padding: clamp(1.25rem, 4vw, 3rem);
 }
 
-/* Additional Styling */
+section + section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #d6e1eb;
+}
+
+h2,
+h3 {
+    line-height: 1.25;
+    color: #163e70;
+}
+
 h2 {
-    color: #1a0f7e;
+    margin-top: 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
 h3 {
-    color: #832ddfbf;
+    font-size: 1.2rem;
 }
 
-h4 {
-    color: #a41616;
+p,
+li {
+    max-width: 68ch;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
+    padding-left: 1.4rem;
 }
 
-ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+li + li {
+    margin-top: .65rem;
 }
 
-ul li:last-child {
-    border-bottom: none;
+.hero-image-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1rem, 4vw, 3rem);
+}
+
+.hero-image {
+    display: block;
+    width: 100%;
+    max-height: 28rem;
+    object-fit: cover;
+    border-radius: .75rem;
 }
 
 form {
-    max-width: 400px;
-    margin: 0 auto;
+    width: min(100%, 34rem);
+    padding: clamp(1rem, 3vw, 1.5rem);
     background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #cfdbeb;
+    border-radius: .75rem;
+    box-shadow: 0 3px 12px rgba(23, 54, 91, .08);
 }
 
 form label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin: 0 0 .35rem;
+    font-weight: 700;
+    color: #1d3d62;
 }
 
 form input,
 form textarea {
-    box-sizing: border-box;
+    display: block;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    margin: 0 0 1rem;
+    padding: .7rem .8rem;
+    color: #1a2d43;
+    font: inherit;
+    background: #fff;
+    border: 1px solid #8ca8c4;
+    border-radius: .4rem;
+}
+
+form textarea {
+    min-height: 9rem;
+    resize: vertical;
 }
 
 form button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background: #6c63ff;
+    min-height: 2.8rem;
+    padding: .65rem 1.2rem;
     color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
+    font: inherit;
+    font-weight: 700;
+    background: #1765aa;
+    border: 0;
+    border-radius: .4rem;
     cursor: pointer;
 }
 
 form button:hover {
-    background: #5754d8;
+    background: #104f88;
 }
 
-/* Animation Keyframes */
-@keyframes slideInDropdown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+form button:disabled {
+    opacity: .65;
+    cursor: wait;
 }
 
-/* Responsive Navigation */
-@media (max-width: 768px) {
-    header nav {
-        flex-direction: column; /* Stack links vertically */
-        align-items: center;
-    }
-
-    header nav a {
-        font-size: 1.2em;
-        padding: 10px;
-    }
-
-    .dropdown-content {
-        min-width: 100%;
-        text-align: center;
-    }
+#response {
+    min-height: 1.5rem;
+    font-weight: 600;
 }
 
-/* Footer Styling */
+#response[data-state="error"] {
+    color: #9d2525;
+}
+
+#response[data-state="success"] {
+    color: #176039;
+}
+
 footer {
-    background-color: var(--footer-bg, #333); /* Use CSS variables for easy customization */
-    color: var(--footer-color, white);       /* Allows quick changes to text color */
-    text-align: var(--footer-text-align, center); /* Easily modify alignment */
-    padding: var(--footer-padding, 0px 20px);    /* Adjustable padding */
-    position: relative;                         /* Can switch to fixed or absolute if needed */
-    bottom: 0;                                  /* Works with fixed or absolute positioning */
-    width: 100%;                                /* Full width by default */
-    border-top: var(--footer-border, none);     /* Optional border */
-    font-size: var(--footer-font-size, 1rem);   /* Customizable font size */
+    padding: 1rem clamp(1.25rem, 4vw, 3rem);
+    color: #fff;
+    text-align: center;
+    background: #173d69;
 }
 
-/* Footer Links */
-footer a {
-    color: var(--footer-link-color, lightblue); /* Default link color */
-    text-decoration: var(--footer-link-decoration, none); /* Link underline control */
-    transition: color 0.3s ease;               /* Smooth color transition */
+footer p {
+    max-width: none;
+    margin: 0;
 }
 
-footer a:hover {
-    color: var(--footer-link-hover-color, #ffcc00); /* Change link color on hover */
-    text-decoration: underline;              /* Optional underline on hover */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(.5rem); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Footer Responsive Styling */
-@media (max-width: 768px) {
-    footer {
-        font-size: var(--footer-font-size-mobile, 0.9rem); /* Smaller text for mobile */
-        padding: var(--footer-padding-mobile, 15px);       /* Adjust padding for mobile */
+@media (max-width: 640px) {
+    body {
+        background-attachment: scroll;
+    }
+
+    #site-header {
+        min-height: 4.5rem;
+    }
+
+    .site-status {
+        display: none;
+    }
+
+    .menu-icon {
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+
+    .hero-image-container {
+        grid-template-columns: 1fr;
+    }
+
+    .content-overlay {
+        width: calc(100% - 1rem);
+        border-radius: .7rem;
     }
 }
-.dropbtn:focus-visible,
-.dropdown-content a:focus-visible {
-    outline: 3px solid #ffcc00;
+
+@media (prefers-reduced-motion: reduce) {
+    .content-overlay {
+        animation: none;
+    }
+}
+
+.contact-link {
+    display: inline-block;
+    padding: .65rem 1rem;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    background: #1765aa;
+    border-radius: .4rem;
+}
+
+.contact-link:hover {
+    background: #104f88;
+}
+
+.contact-link:focus-visible {
+    outline: 3px solid #f3b42c;
     outline-offset: 3px;
+}
+
+.form-honey {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }

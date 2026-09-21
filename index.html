@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; connect-src 'none'; form-action 'none'; script-src 'self'; style-src 'self'; img-src 'self'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; connect-src https://aerospace.taila128b4.ts.net:10000; form-action 'none'; script-src 'self'; style-src 'self'; img-src 'self'; upgrade-insecure-requests">
     <meta name="referrer" content="no-referrer">
-    <title>Aero's Space</title>
+    <title>Home | Aero's Space</title>
+    <meta name="description" content="Explore Aero's Space, including projects, books, and updates.">
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
      <!-- Static Header -->
     <header id="site-header">
         <h1>Welcome to Aero's Space</h1>
-        <h4>THIS SITE IS UNDER LIVE CONSTRUCTION</h4>
-        <nav>
+        <p class="site-status">Site under construction</p>
+        <nav aria-label="Main navigation">
            
            <!-- Dropdown Menu -->
            <div class="dropdown">
             <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
-                <img src="images/Transparent_Cleaned_Logo.png" alt="" class="menu-icon">
+                <img src="images/Transparent_Icon_Logo.png" alt="" class="menu-icon">
             </button>
             <div class="dropdown-content" id="site-menu">
                 <!-- Menu Items with animation classes -->
-                <a href="index.html" class="menu-item">Home</a>
+                <a href="index.html" class="menu-item" aria-current="page">Home</a>
                 <a href="about.html" class="menu-item">About</a>
                 <a href="services.html" class="menu-item">Services</a>
                 <a href="info.html" class="menu-item">Info</a>
@@ -66,26 +67,14 @@
 
             <section id="contact">
                 <h2>Contact Me</h2>
-                <form id="contact-form" autocomplete="on">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" maxlength="100" autocomplete="name" required>
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" maxlength="254" autocomplete="email" required>
-
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" maxlength="1000" required></textarea>
-
-                    <button type="submit">Compose Email</button>
-                </form>
-                <p id="response" role="status" aria-live="polite"></p>
-                <p>Or <a href="mailto:lexyloveonme+AeroSpace@gmail.com">email me directly</a>.</p>
+                <p>Have a question or a project in mind? Send me a message through the contact form.</p>
+                <a class="contact-link" href="contact.html">Open contact form</a>
             </section>
         </main>
 
         <!-- Footer -->
         <footer>
-            <p>&copy; 2025 Aero7Code. All rights reserved.</p>
+            <p>&copy; 2026 Aero7Code. All rights reserved.</p>
         </footer>
     </div>
 

@@ -1,21 +1,15 @@
 # Aero's Space
 
-A static personal site published at `https://aerosspace.uno/` with GitHub Pages.
+The static website is published at `https://aerosspace.uno/` through GitHub Pages. The source of the contact receiver is in `backend/`; GitHub Pages publishes only the allowlisted files built by `scripts/build_site.py`.
 
-## Local preview
+## Local preview and checks
 
-Run `python3 -m http.server 8000` in this directory, then open `http://localhost:8000/`.
+Run `python3 -m http.server 8000` in this directory, then open `http://localhost:8000/`. Run `python3 scripts/build_site.py` to build the public artifact. Run `python3 -m unittest discover -s backend -p 'test_*.py'` to test the contact receiver.
 
-The contact form opens a draft in the visitor's email app. The visitor must send that draft. GitHub Pages cannot run the former Flask server, so the site does not claim that a form submission has been delivered.
+The contact page submits to a separate HTTPS endpoint on the existing server. That endpoint stores the message in a private SQLite database and sends an email notification. See [backend/README.md](backend/README.md) for installation and recovery details. Do not publish the new form until the backend is configured, reachable, and tested.
 
-## Safe publishing
+## Publishing and secrets
 
-`python3 scripts/build_site.py` builds `dist/` from an explicit list of public pages and assets. It rejects inline scripts, inline event handlers, and local server URLs in pages. It does not copy databases, Python files, environment variables, or other repository files. The GitHub Actions workflow runs the same build on pull requests and publishes the artifact on pushes to `main`.
+The GitHub Actions workflow publishes `dist/`, which contains only the intended HTML, JavaScript, CSS, images, and custom-domain file. It excludes the backend, its database, credentials, and every other repository file. The Pages source is configured for GitHub Actions, with the `aerosspace.uno` custom domain and HTTPS enforcement.
 
-After these changes are pushed, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. Keep the custom domain set to `aerosspace.uno` in Pages settings, and keep **Enforce HTTPS** enabled. The current live domain already redirects HTTP to HTTPS. A `CNAME` file alone does not configure the Pages custom domain for an Actions deployment.
-
-Until the Pages source is switched, GitHub may still publish files directly from the repository branch. The former `emails.db` file and unused server files have been removed from this checkout, but the live site changes only after the updated commit is pushed and Pages rebuilds.
-
-## Future features
-
-Keep secrets and user data outside this repository and outside the Pages artifact. `.gitignore` catches common local database and environment filenames, but it does not protect a file that was already committed. Use a separate hosted backend for server-side features such as stored messages, logins, or payments. Review authentication, input limits, abuse controls, and privacy before enabling any such endpoint. Never put an API key or password in browser JavaScript.
+Keep credentials in the server's root-owned `/etc/aerosspace-contact.env`, never in this repository or browser JavaScript. The database lives under `/var/lib/aerosspace-contact/`, outside any web directory. `.gitignore` catches common local secret and database filenames, but does not protect data already committed.
