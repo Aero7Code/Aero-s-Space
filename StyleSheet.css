@@ -224,7 +224,7 @@ header .menu .menu-item-4:hover {
 
 .dropdown-content {
     position: absolute;
-    display: none;
+    display: block;
     background-color: #f1f1f1;
     min-width: 160px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -241,7 +241,11 @@ header .menu .menu-item-4:hover {
     transition: background-color 0.3s;
 }
 
-.dropdown:hover .dropdown-content {
+.js .dropdown-content {
+    display: none;
+}
+
+.js .dropbtn[aria-expanded="true"] + .dropdown-content {
     display: block;
 }
 
@@ -301,6 +305,7 @@ form label {
 
 form input,
 form textarea {
+    box-sizing: border-box;
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -385,4 +390,9 @@ footer a:hover {
         font-size: var(--footer-font-size-mobile, 0.9rem); /* Smaller text for mobile */
         padding: var(--footer-padding-mobile, 15px);       /* Adjust padding for mobile */
     }
+}
+.dropbtn:focus-visible,
+.dropdown-content a:focus-visible {
+    outline: 3px solid #ffcc00;
+    outline-offset: 3px;
 }

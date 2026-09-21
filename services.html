@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; connect-src 'none'; form-action 'none'; script-src 'self'; style-src 'self'; img-src 'self'; upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer">
     <title>Services</title>
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
@@ -16,10 +18,10 @@
         
            <!-- Dropdown Menu -->
            <div class="dropdown">
-            <button class="dropbtn">
-                <img src="images/Transparent_Cleaned_Logo.png" alt="Menu" class="menu-icon">
+            <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+                <img src="images/Transparent_Cleaned_Logo.png" alt="" class="menu-icon">
             </button>
-            <div class="dropdown-content">
+            <div class="dropdown-content" id="site-menu">
                 <!-- Menu Items with animation classes -->
                 <a href="index.html" class="menu-item">Home</a>
                 <a href="about.html" class="menu-item">About</a>
@@ -63,20 +65,6 @@
     </div>
 
     <!-- External Scripts -->
-    <script>
-        // Content animation (sliding in on load)
-        document.addEventListener('DOMContentLoaded', () => {
-            const contentOverlay = document.querySelector('.content-overlay');
-            contentOverlay.style.opacity = 0;
-            contentOverlay.style.transform = 'translateY(20px)';
-            requestAnimationFrame(() => {
-                contentOverlay.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                contentOverlay.style.opacity = 1;
-                contentOverlay.style.transform = 'translateY(0)';
-            });
-        });
-    </script>
-
-    <script src="Script.js"></script>
+    <script src="Script.js" defer></script>
 </body>
 </html>

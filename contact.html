@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; connect-src 'none'; form-action 'none'; script-src 'self'; style-src 'self'; img-src 'self'; upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer">
     <title>Aero's Space</title>
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
@@ -16,10 +18,10 @@
         
            <!-- Dropdown Menu -->
            <div class="dropdown">
-            <button class="dropbtn">
-                <img src="images/Transparent_Cleaned_Logo.png" alt="Menu" class="menu-icon">
+            <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+                <img src="images/Transparent_Cleaned_Logo.png" alt="" class="menu-icon">
             </button>
-            <div class="dropdown-content">
+            <div class="dropdown-content" id="site-menu">
                 <!-- Menu Items with animation classes -->
                 <a href="index.html" class="menu-item">Home</a>
                 <a href="about.html" class="menu-item">About</a>
@@ -37,19 +39,20 @@
         <main>
             <section id="contact">
                 <h2>Contact Me</h2>
-                <form id="contact-form">
+                <form id="contact-form" autocomplete="on">
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" maxlength="100" autocomplete="name" required>
 
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" maxlength="254" autocomplete="email" required>
 
                     <label for="message">Message:</label>
-                    <textarea id="message" name="message" required></textarea>
+                    <textarea id="message" name="message" maxlength="1000" required></textarea>
 
-                    <button type="submit">Send Message</button>
+                    <button type="submit">Compose Email</button>
                 </form>
-                <p id="response"></p>
+                <p id="response" role="status" aria-live="polite"></p>
+                <p>Or <a href="mailto:lexyloveonme+AeroSpace@gmail.com">email me directly</a>.</p>
             </section>
         </main>
 
@@ -60,66 +63,6 @@
     </div>
 
     <!-- External Scripts -->
-    <script>
-        // Contact form submission
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', async function (e) {
-                e.preventDefault();
-
-                const name = document.getElementById('name').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const message = document.getElementById('message').value.trim();
-                const responseElement = document.getElementById('response');
-
-                if (!name || !email || !message) {
-                    responseElement.textContent = 'All fields are required.';
-                    return;
-                }
-
-                if (!/\S+@\S+\.\S+/.test(email)) {
-                    responseElement.textContent = 'Please enter a valid email address.';
-                    return;
-                }
-
-                responseElement.textContent = 'Sending message... Please wait.';
-
-                try {
-                    const response = await fetch('http://localhost:5000/contact', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ name, email, message }),
-                        credentials: 'include',
-                    });
-
-                    const result = await response.json();
-                    responseElement.textContent = response.ok
-                        ? result.message || 'Message sent successfully!'
-                        : result.error || 'An error occurred.';
-
-                    if (response.ok) {
-                        document.getElementById('name').value = '';
-                        document.getElementById('email').value = '';
-                        document.getElementById('message').value = '';
-                    }
-                } catch (error) {
-                    console.error('Error submitting form:', error);
-                    responseElement.textContent = 'An error occurred. Please try again later.';
-                }
-            });
-        }
-
-        // Content animation (sliding in on load)
-        document.addEventListener('DOMContentLoaded', () => {
-            const contentOverlay = document.querySelector('.content-overlay');
-            contentOverlay.style.opacity = 0;
-            contentOverlay.style.transform = 'translateY(20px)';
-            setTimeout(() => {
-                contentOverlay.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                contentOverlay.style.opacity = 1;
-                contentOverlay.style.transform = 'translateY(0)';
-            }, 50);
-        });
-    </script>
+    <script src="Script.js" defer></script>
 </body>
 </html>

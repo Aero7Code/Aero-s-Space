@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; connect-src 'none'; form-action 'none'; script-src 'self'; style-src 'self'; img-src 'self'; upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer">
     <title>Aero's Space</title>
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
@@ -16,10 +18,10 @@
         
            <!-- Dropdown Menu -->
            <div class="dropdown">
-            <button class="dropbtn">
-                <img src="images/Transparent_Cleaned_Logo.png" alt="Menu" class="menu-icon">
+            <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+                <img src="images/Transparent_Cleaned_Logo.png" alt="" class="menu-icon">
             </button>
-            <div class="dropdown-content">
+            <div class="dropdown-content" id="site-menu">
                 <!-- Menu Items with animation classes -->
                 <a href="index.html" class="menu-item">Home</a>
                 <a href="about.html" class="menu-item">About</a>
@@ -53,19 +55,20 @@
 
             <section id="contact">
                 <h2>Contact Me</h2>
-                <form id="contact-form">
+                <form id="contact-form" autocomplete="on">
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" maxlength="100" autocomplete="name" required>
 
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" maxlength="254" autocomplete="email" required>
 
                     <label for="message">Message:</label>
-                    <textarea id="message" name="message" required></textarea>
+                    <textarea id="message" name="message" maxlength="1000" required></textarea>
 
-                    <button type="submit">Send Message</button>
+                    <button type="submit">Compose Email</button>
                 </form>
-                <p id="response"></p>
+                <p id="response" role="status" aria-live="polite"></p>
+                <p>Or <a href="mailto:lexyloveonme+AeroSpace@gmail.com">email me directly</a>.</p>
             </section>
         </main>
 
@@ -76,29 +79,6 @@
     </div>
 
     <!-- External Scripts -->
-    <script>
-        // Image and text animations
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroImage = document.querySelector('.hero-image'); 
-            const heroText = document.querySelector('.hero-text');
-            
-            // Initial positions for animation
-            heroImage.style.opacity = 0;
-            heroImage.style.transform = 'translateY(-50px)';
-            heroText.style.opacity = 0;
-
-            // Trigger animations
-            setTimeout(() => {
-                heroImage.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                heroImage.style.opacity = 1;
-                heroImage.style.transform = 'translateY(0)';
-
-                setTimeout(() => {
-                    heroText.style.transition = 'opacity 0.8s ease';
-                    heroText.style.opacity = 1;
-                }, 400); // Delay for the text fade-in
-            }, 200); // Delay for the image drop-in
-        });
-    </script>
+    <script src="Script.js" defer></script>
 </body>
 </html>

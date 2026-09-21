@@ -1,1 +1,0 @@
-calories_women = ((age_years * 0.074) - (weight_pounds * 0.05741) + (heart_bpm * 0.4472) - 20.4022) * time_minutes / 4.184
