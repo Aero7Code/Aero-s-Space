@@ -12,36 +12,41 @@
 </head>
 <body>
      <!-- Static Header -->
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header id="site-header">
-        <h1>Welcome to Aero's Space</h1>
-        <p class="site-status">Site under construction</p>
-        <nav aria-label="Main navigation">
-           
-        
-           <!-- Dropdown Menu -->
-           <div class="dropdown">
-            <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
-                <img src="images/Transparent_Icon_Logo.png" alt="" class="menu-icon">
-            </button>
-            <div class="dropdown-content" id="site-menu">
-                <!-- Menu Items with animation classes -->
-                <a href="index.html" class="menu-item">Home</a>
-                <a href="about.html" class="menu-item">About</a>
-                <a href="services.html" class="menu-item">Services</a>
-                <a href="info.html" class="menu-item">Info</a>
-                <a href="contact.html" class="menu-item" aria-current="page">Contact</a>
-            </div>
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="Aero's Space home">
+                <img src="images/Transparent_Icon_Logo.png" alt="" class="brand-mark" width="48" height="48">
+                <span class="brand-copy"><strong>Aero's Space</strong><small>Stories, ideas &amp; creative work</small></span>
+            </a>
+            <nav aria-label="Main navigation">
+                <div class="dropdown">
+                    <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+                        <span>Menu</span><span class="menu-bars" aria-hidden="true"></span>
+                    </button>
+                    <div class="dropdown-content" id="site-menu">
+                    <a href="index.html" class="menu-item">Home</a>
+                    <a href="about.html" class="menu-item">About</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="info.html" class="menu-item">Info</a>
+                    <a href="contact.html" class="menu-item" aria-current="page">Contact</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-        </nav>
     </header>
 
     <!-- Wrapper for content overlay -->
     <div class="content-overlay">
         <!-- Main Content -->
-        <main>
-            <section id="contact">
+        <main id="main-content" tabindex="-1">
+            <section id="contact" class="page-intro">
+                <p class="eyebrow">Start a conversation</p>
                 <h2>Contact Me</h2>
-                <p>Send a message here. It will be saved privately and emailed to me.</p>
+                <p class="lead">Have a question or an idea? Send me a message below.</p>
+            </section>
+            <div class="contact-layout">
+                <div class="contact-card">
                 <form id="contact-form" autocomplete="on">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" maxlength="100" autocomplete="name" required>
@@ -59,7 +64,13 @@
                     <button type="submit">Send message</button>
                 </form>
                 <p id="response" role="status" aria-live="polite"></p>
-            </section>
+                </div>
+                <aside class="contact-aside">
+                    <p class="eyebrow">A private note</p>
+                    <h2>One message, one place.</h2>
+                    <p>Your message will be saved privately and sent to me by email. I use your address only to reply.</p>
+                </aside>
+            </div>
         </main>
 
         <!-- Footer -->

@@ -12,43 +12,57 @@
 </head>
 <body>
      <!-- Static Header -->
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header id="site-header">
-        <h1>Welcome to Aero's Space</h1>
-        <p class="site-status">Site under construction</p>
-        <nav aria-label="Main navigation">
-           
-        
-           <!-- Dropdown Menu -->
-           <div class="dropdown">
-            <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
-                <img src="images/Transparent_Icon_Logo.png" alt="" class="menu-icon">
-            </button>
-            <div class="dropdown-content" id="site-menu">
-                <!-- Menu Items with animation classes -->
-                <a href="index.html" class="menu-item">Home</a>
-                <a href="about.html" class="menu-item" aria-current="page">About</a>
-                <a href="services.html" class="menu-item">Services</a>
-                <a href="info.html" class="menu-item">Info</a>
-                <a href="contact.html" class="menu-item">Contact</a>
-            </div>
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="Aero's Space home">
+                <img src="images/Transparent_Icon_Logo.png" alt="" class="brand-mark" width="48" height="48">
+                <span class="brand-copy"><strong>Aero's Space</strong><small>Stories, ideas &amp; creative work</small></span>
+            </a>
+            <nav aria-label="Main navigation">
+                <div class="dropdown">
+                    <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+                        <span>Menu</span><span class="menu-bars" aria-hidden="true"></span>
+                    </button>
+                    <div class="dropdown-content" id="site-menu">
+                    <a href="index.html" class="menu-item">Home</a>
+                    <a href="about.html" class="menu-item" aria-current="page">About</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="info.html" class="menu-item">Info</a>
+                    <a href="contact.html" class="menu-item">Contact</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-        </nav>
     </header>
 
    <!-- Wrapper for content overlay -->
     <div class="content-overlay">
-    <!-- Main Content -->
-    <main>
-        <section id="about">
+    <main id="main-content" tabindex="-1">
+        <section id="about" class="page-intro">
+            <p class="eyebrow">Meet the creator</p>
             <h2>About Aero7</h2>
-            <p>Welcome to my personal space! Here, you can learn more about me, what I do, and my cozy creations.</p>
+            <p class="lead">Welcome to my personal space. This is where I share the stories, projects, and cozy creations I am building.</p>
         </section>
 
-        <section id="contact">
-                <h2>Contact Me</h2>
-                <p>Have a question or a project in mind? Send me a message through the contact form.</p>
-                <a class="contact-link" href="contact.html">Open contact form</a>
-            </section>
+        <section class="spotlight-panel">
+            <div>
+                <p class="eyebrow">A little more about me</p>
+                <h2>Curious by nature, creative at heart.</h2>
+                <p>I enjoy bringing ideas to life, from cozy mysteries to new digital projects. Take a look around and see what is taking shape.</p>
+                <a class="text-link" href="info.html">More about Aero <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <img src="images/photo.webp" alt="Illustrated portrait of Aero" width="1024" height="1024" loading="lazy">
+        </section>
+
+        <section id="contact" class="contact-banner">
+            <div>
+                <p class="eyebrow">Get in touch</p>
+                <h2>Have a question or an idea?</h2>
+                <p>Send me a message through the contact page.</p>
+            </div>
+            <a class="button-link button-link-light" href="contact.html">Open contact page <span aria-hidden="true">&rarr;</span></a>
+        </section>
     </main>
 
     <!-- Footer -->

@@ -12,53 +12,57 @@
 </head>
 <body>
      <!-- Static Header -->
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header id="site-header">
-        <h1>Welcome to Aero's Space</h1>
-        <p class="site-status">Site under construction</p>
-        <nav aria-label="Main navigation">
-           
-        
-           <!-- Dropdown Menu -->
-           <div class="dropdown">
-            <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
-                <img src="images/Transparent_Icon_Logo.png" alt="" class="menu-icon">
-            </button>
-            <div class="dropdown-content" id="site-menu">
-                <!-- Menu Items with animation classes -->
-                <a href="index.html" class="menu-item">Home</a>
-                <a href="about.html" class="menu-item">About</a>
-                <a href="services.html" class="menu-item">Services</a>
-                <a href="info.html" class="menu-item" aria-current="page">Info</a>
-                <a href="contact.html" class="menu-item">Contact</a>
-            </div>
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="Aero's Space home">
+                <img src="images/Transparent_Icon_Logo.png" alt="" class="brand-mark" width="48" height="48">
+                <span class="brand-copy"><strong>Aero's Space</strong><small>Stories, ideas &amp; creative work</small></span>
+            </a>
+            <nav aria-label="Main navigation">
+                <div class="dropdown">
+                    <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+                        <span>Menu</span><span class="menu-bars" aria-hidden="true"></span>
+                    </button>
+                    <div class="dropdown-content" id="site-menu">
+                    <a href="index.html" class="menu-item">Home</a>
+                    <a href="about.html" class="menu-item">About</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="info.html" class="menu-item" aria-current="page">Info</a>
+                    <a href="contact.html" class="menu-item">Contact</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-        </nav>
     </header>
 
     <!-- Wrapper for content overlay -->
     <div class="content-overlay">
         <!-- Main Content -->
-        <main>
-            <!-- Animated Image Section -->
-            <section id="hero-image-section">
+        <main id="main-content" tabindex="-1">
+            <section id="hero-image-section" class="profile-panel">
                 <div class="hero-image-container">
-                    <img src="images/photo.webp" alt="Illustrated portrait of a smiling person wearing a dark hood" class="hero-image">
+                    <img src="images/photo.webp" alt="Illustrated portrait of Aero" class="hero-image" width="1024" height="1024">
                     <div class="hero-text">
+                        <p class="eyebrow">A closer look</p>
                         <h2 class="hero-title">Welcome to Aero's World</h2>
-                        <p class="hero-caption">Discover the magic of innovation and creativity.</p>
+                        <p class="hero-caption lead">A place for creative ideas, thoughtful work, and the stories behind them.</p>
                     </div>
                 </div>
             </section>
 
-            <section id="about">
+            <section id="about" class="feature-card standalone-card">
                 <h2>About Aero7</h2>
                 <p>Welcome to my personal space! Here, you can learn more about me, what I do, and my cozy creations.</p>
             </section>
 
-            <section id="contact">
-                <h2>Contact Me</h2>
-                <p>Have a question or a project in mind? Send me a message through the contact form.</p>
-                <a class="contact-link" href="contact.html">Open contact form</a>
+            <section id="contact" class="contact-banner">
+                <div>
+                    <p class="eyebrow">Stay in touch</p>
+                    <h2>Want to reach out?</h2>
+                    <p>Send a message through the contact page.</p>
+                </div>
+                <a class="button-link button-link-light" href="contact.html">Open contact page <span aria-hidden="true">&rarr;</span></a>
             </section>
         </main>
 
