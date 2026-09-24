@@ -3,62 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; connect-src 'none'; form-action 'none'; script-src 'self'; style-src 'self'; img-src 'self'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; connect-src https://aerospace.taila128b4.ts.net:10000; form-action 'none'; script-src 'self'; style-src 'self'; img-src 'self'; upgrade-insecure-requests">
     <meta name="referrer" content="no-referrer">
-    <title>Aero's Space</title>
+    <title>Contact | Aero's Space</title>
+    <meta name="description" content="Send a message to Aero through the secure contact form.">
+    <link rel="icon" type="image/png" href="images/Transparent_Icon_Logo.png">
     <link rel="stylesheet" href="StyleSheet.css">
 </head>
 <body>
      <!-- Static Header -->
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header id="site-header">
-        <h1>Welcome to Aero's Space</h1>
-        <h4>THIS SITE IS UNDER LIVE CONSTRUCTION</h4>
-        <nav>
-           
-        
-           <!-- Dropdown Menu -->
-           <div class="dropdown">
-            <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
-                <img src="images/Transparent_Cleaned_Logo.png" alt="" class="menu-icon">
-            </button>
-            <div class="dropdown-content" id="site-menu">
-                <!-- Menu Items with animation classes -->
-                <a href="index.html" class="menu-item">Home</a>
-                <a href="about.html" class="menu-item">About</a>
-                <a href="services.html" class="menu-item">Services</a>
-                <a href="info.html" class="menu-item">Info</a>
-                <a href="contact.html" class="menu-item">Contact</a>
-            </div>
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="Aero's Space home">
+                <img src="images/Transparent_Icon_Logo.png" alt="" class="brand-mark" width="48" height="48">
+                <span class="brand-copy"><strong>Aero's Space</strong><small>Stories, ideas &amp; creative work</small></span>
+            </a>
+            <nav aria-label="Main navigation">
+                <div class="dropdown">
+                    <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+                        <span>Menu</span><span class="menu-bars" aria-hidden="true"></span>
+                    </button>
+                    <div class="dropdown-content" id="site-menu">
+                    <a href="index.html" class="menu-item">Home</a>
+                    <a href="about.html" class="menu-item">About</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="info.html" class="menu-item">Info</a>
+                    <a href="contact.html" class="menu-item" aria-current="page">Contact</a>
+                    <a href="account.html" class="menu-item">Movie login</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-        </nav>
     </header>
 
     <!-- Wrapper for content overlay -->
     <div class="content-overlay">
         <!-- Main Content -->
-        <main>
-            <section id="contact">
+        <main id="main-content" tabindex="-1">
+            <section id="contact" class="page-intro">
+                <p class="eyebrow">Start a conversation</p>
                 <h2>Contact Me</h2>
+                <p class="lead">Have a question or an idea? Send me a message below.</p>
+            </section>
+            <div class="contact-layout">
+                <div class="contact-card">
                 <form id="contact-form" autocomplete="on">
-                    <label for="name">Name:</label>
+                    <label for="name">Name</label>
                     <input type="text" id="name" name="name" maxlength="100" autocomplete="name" required>
 
-                    <label for="email">Email:</label>
+                    <label for="email">Email</label>
                     <input type="email" id="email" name="email" maxlength="254" autocomplete="email" required>
 
-                    <label for="message">Message:</label>
+                    <label for="message">Message</label>
                     <textarea id="message" name="message" maxlength="1000" required></textarea>
 
-                    <button type="submit">Compose Email</button>
+                    <div class="form-honey" aria-hidden="true">
+                        <label for="website">Leave this field empty</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    <button type="submit">Send message</button>
                 </form>
                 <p id="response" role="status" aria-live="polite"></p>
-                <p>Or <a href="mailto:lexyloveonme+AeroSpace@gmail.com">email me directly</a>.</p>
-            </section>
+                </div>
+                <aside class="contact-aside">
+                    <p class="eyebrow">A private note</p>
+                    <h2>One message, one place.</h2>
+                    <p>Your message will be saved privately and sent to me by email. I use your address only to reply.</p>
+                </aside>
+            </div>
         </main>
 
         <!-- Footer -->
         <footer>
-            <p>&copy; 2025 Aero7Code. All rights reserved.</p>
+            <p>&copy; 2026 Aero7Code. All rights reserved.</p>
         </footer>
     </div>
 
