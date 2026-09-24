@@ -1,15 +1,15 @@
 # Aero's Space
 
-The static website is published at `https://aerosspace.uno/` through GitHub Pages. The source of the contact receiver is in `backend/`; GitHub Pages publishes only the allowlisted files built by `scripts/build_site.py`.
+The static website is published at `https://aerosspace.uno/` through GitHub Pages. This public repository contains only the website-facing source and publishes the allowlisted files built by `scripts/build_site.py`. Contact, account, Tailscale, and Jellyfin services are maintained separately in a private backend repository.
 
 ## Local preview and checks
 
-Run `python3 -m http.server 8000` in this directory, then open `http://localhost:8000/`. Run `python3 scripts/build_site.py` to build the public artifact. Run `python3 -m unittest discover -s backend -p 'test_*.py'` to test the contact receiver.
+Run `python3 -m http.server 8000` in this directory, then open `http://localhost:8000/`. Run `python3 scripts/build_site.py` to build the public artifact.
 
-The contact page submits to a separate HTTPS endpoint on the existing server. That endpoint stores the message in a private SQLite database and sends an email notification. See [backend/README.md](backend/README.md) for installation and recovery details. Do not publish the new form until the backend is configured, reachable, and tested.
+The contact and movie-account pages submit to separate HTTPS endpoints on the existing server. Private SQLite databases, credentials, verification delivery, device records, Tailscale automation, and Jellyfin provisioning remain in the private backend project and on the server.
 
 ## Publishing and secrets
 
-The GitHub Actions workflow publishes `dist/`, which contains only the intended HTML, JavaScript, CSS, images, and custom-domain file. It excludes the backend, its database, credentials, and every other repository file. The Pages source is configured for GitHub Actions, with the `aerosspace.uno` custom domain and HTTPS enforcement.
+The GitHub Actions workflow publishes `dist/`, which contains only the intended HTML, JavaScript, CSS, images, and custom-domain file. The Pages source is configured for GitHub Actions, with the `aerosspace.uno` custom domain and HTTPS enforcement.
 
-Keep credentials in the server's root-owned `/etc/aerosspace-contact.env`, never in this repository or browser JavaScript. The database lives under `/var/lib/aerosspace-contact/`, outside any web directory. `.gitignore` catches common local secret and database filenames, but does not protect data already committed.
+Never put credentials, private databases, server configuration, or backend source in this repository or browser JavaScript. `.gitignore` catches common local secret and database filenames, but does not protect data already committed.

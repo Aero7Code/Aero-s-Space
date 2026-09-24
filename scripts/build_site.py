@@ -5,8 +5,8 @@ import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "dist"
-PAGES = ("index.html", "about.html", "services.html", "info.html", "contact.html")
-ASSETS = ("Script.js", "StyleSheet.css", "CNAME")
+PAGES = ("index.html", "about.html", "services.html", "info.html", "contact.html", "account.html")
+ASSETS = ("Script.js", "Account.js", "StyleSheet.css", "CNAME")
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
 
 

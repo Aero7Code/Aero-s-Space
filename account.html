@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; connect-src https://aerospace.taila128b4.ts.net:10001; form-action 'none'; script-src 'self'; style-src 'self'; img-src 'self'; upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer">
+    <title>Movie account | Aero's Space</title>
+    <meta name="description" content="Create and manage your private Aero's Space movie profile.">
+    <link rel="icon" type="image/png" href="images/Transparent_Icon_Logo.png">
+    <link rel="stylesheet" href="StyleSheet.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header id="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="Aero's Space home">
+                <img src="images/Transparent_Icon_Logo.png" alt="" class="brand-mark" width="48" height="48">
+                <span class="brand-copy"><strong>Aero's Space</strong><small>Stories, ideas &amp; creative work</small></span>
+            </a>
+            <nav aria-label="Main navigation">
+                <div class="dropdown">
+                    <button class="dropbtn" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+                        <span>Menu</span><span class="menu-bars" aria-hidden="true"></span>
+                    </button>
+                    <div class="dropdown-content" id="site-menu">
+                    <a href="index.html" class="menu-item">Home</a>
+                    <a href="about.html" class="menu-item">About</a>
+                    <a href="services.html" class="menu-item">Services</a>
+                    <a href="info.html" class="menu-item">Info</a>
+                    <a href="contact.html" class="menu-item">Contact</a>
+                    <a href="account.html" class="menu-item" aria-current="page">Movie login</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content-overlay">
+        <main id="main-content" tabindex="-1">
+            <section class="page-intro account-intro">
+                <div>
+                    <p class="eyebrow">Your private movie profile</p>
+                    <h2>Welcome to movie night.</h2>
+                    <p class="lead">One friendly account, verified by email, with guided private access to Aero's Jellyfin library.</p>
+                </div>
+                <div class="security-note" aria-label="Account protections">
+                    <strong>Built for privacy</strong>
+                    <span>Passwords are hashed. Profiles stay separate. Movie access never includes server administration or deletion.</span>
+                    <span>For account security, we record a private browser-device ID, IP address, browser type, and verified Tailscale identity. Websites cannot read your MAC address.</span>
+                </div>
+            </section>
+
+            <noscript><p class="notice notice-error">JavaScript is required to create or use a movie account.</p></noscript>
+            <p id="account-status" class="notice" role="status" aria-live="polite" hidden></p>
+
+            <section id="auth-view" class="account-card" aria-labelledby="auth-heading">
+                <div class="account-card-heading">
+                    <div>
+                        <p class="eyebrow">Get started</p>
+                        <h2 id="auth-heading">Your movie account</h2>
+                    </div>
+                    <div class="auth-tabs" role="tablist" aria-label="Account action">
+                        <button type="button" role="tab" id="login-tab" aria-selected="true" aria-controls="login-panel">Sign in</button>
+                        <button type="button" role="tab" id="signup-tab" aria-selected="false" aria-controls="signup-panel">Create account</button>
+                    </div>
+                </div>
+
+                <div id="login-panel" role="tabpanel" aria-labelledby="login-tab">
+                    <form id="login-form" class="account-form">
+                        <label for="login-username">Username</label>
+                        <input id="login-username" name="username" type="text" maxlength="32" autocomplete="username" required>
+                        <label for="login-password">Password</label>
+                        <input id="login-password" name="password" type="password" maxlength="128" autocomplete="current-password" required>
+                        <label class="show-password"><input type="checkbox" data-show-password="login-password"> Show password</label>
+                        <button type="submit">Sign in</button>
+                    </form>
+                </div>
+
+                <div id="signup-panel" role="tabpanel" aria-labelledby="signup-tab" hidden>
+                    <form id="signup-form" class="account-form">
+                        <label for="signup-username">Choose a username</label>
+                        <input id="signup-username" name="username" type="text" minlength="3" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9_.-]{2,31}" autocomplete="username" aria-describedby="username-help" required>
+                        <small id="username-help">3–32 letters or numbers; dots, dashes, and underscores are okay.</small>
+
+                        <label for="signup-email">Email</label>
+                        <input id="signup-email" name="email" type="email" maxlength="254" autocomplete="email" aria-describedby="contact-help" required>
+                        <small id="contact-help">We use this to verify your account and send your private connection instructions.</small>
+
+                        <label for="signup-password">Create a password</label>
+                        <input id="signup-password" name="password" type="password" minlength="10" maxlength="128" autocomplete="new-password" aria-describedby="password-help" required>
+                        <small id="password-help">At least 10 characters, including a capital letter and a number.</small>
+                        <label class="show-password"><input type="checkbox" data-show-password="signup-password"> Show password</label>
+                        <button type="submit">Create my account</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="verify-view" class="account-card verify-card" aria-labelledby="verify-heading" hidden>
+                <p class="eyebrow">One quick check</p>
+                <h2 id="verify-heading">Enter your 6-digit code</h2>
+                <p id="verify-message">We sent a verification code to your contact method.</p>
+                <form id="verify-form" class="account-form compact-form">
+                    <label for="verify-code">Verification code</label>
+                    <input id="verify-code" name="code" class="code-input" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" minlength="6" maxlength="6" required>
+                    <button type="submit">Verify and continue</button>
+                </form>
+                <div class="verify-actions">
+                    <button id="resend-code" class="quiet-button" type="button">Send a new code</button>
+                    <button id="back-to-signup" class="quiet-button" type="button">Use different details</button>
+                </div>
+            </section>
+
+            <section id="profile-view" class="profile-dashboard" aria-labelledby="profile-heading" hidden>
+                <div class="profile-welcome">
+                    <div>
+                        <p class="eyebrow">Signed in</p>
+                        <h2 id="profile-heading">Make it yours, <span id="profile-greeting"></span>.</h2>
+                        <p>Your preferences are private to your account.</p>
+                    </div>
+                    <button id="logout-button" class="quiet-button" type="button">Sign out</button>
+                </div>
+
+                <div class="profile-grid">
+                    <section class="account-card">
+                        <p class="eyebrow">Step 1</p>
+                        <h3>Personalize your profile</h3>
+                        <form id="profile-form" class="account-form">
+                            <label for="display-name">Display name</label>
+                            <input id="display-name" name="displayName" type="text" maxlength="40" autocomplete="nickname" required>
+                            <label for="accent">Profile style</label>
+                            <select id="accent" name="accent">
+                                <option value="ocean">Ocean blue</option>
+                                <option value="midnight">Midnight</option>
+                                <option value="warm">Warm sunset</option>
+                            </select>
+                            <label for="audio-language">Preferred audio</label>
+                            <select id="audio-language" name="audioLanguage">
+                                <option value="original">Original language</option>
+                                <option value="english">English</option>
+                                <option value="japanese">Japanese</option>
+                            </select>
+                            <label for="subtitle-mode">Subtitles</label>
+                            <select id="subtitle-mode" name="subtitleMode">
+                                <option value="foreign">Foreign language parts</option>
+                                <option value="always">Always on</option>
+                                <option value="off">Off</option>
+                            </select>
+                            <button type="submit">Save preferences</button>
+                        </form>
+                    </section>
+
+                    <section class="account-card jellyfin-card">
+                        <p class="eyebrow">Step 2</p>
+                        <h3>Connect your device</h3>
+                        <div id="connection-queued">
+                            <p class="setup-state">Setup assistant working</p>
+                            <p>Your verified email is in the setup queue. The assistant will prepare your private Tailscale invitation without changing unrelated server settings.</p>
+                        </div>
+                        <div id="connection-invited" hidden>
+                            <p class="setup-state">Invitation sent</p>
+                            <p>Open the email, accept the Tailscale invitation with this same email address, install the official app if asked, and turn it on. The assistant handles the network and server configuration.</p>
+                            <button id="refresh-connection" class="quiet-button" type="button">Check my connection</button>
+                        </div>
+                        <div id="connection-ready" hidden>
+                            <p class="ready-badge">Approved device connected</p>
+                            <p>This verified Tailscale identity is now privately assigned to your account.</p>
+                            <p class="permission-note">Known web devices using this login: <strong id="known-device-count">1</strong>. A new browser is grouped here after a successful sign-in.</p>
+                        </div>
+                        <div id="connection-duplicate" hidden>
+                            <p class="warning-badge">Device already connected</p>
+                            <p>This Tailscale identity is already assigned to another account, so a duplicate account was not activated. Contact Aero if this is unexpected.</p>
+                        </div>
+                        <div id="connection-mismatch" hidden>
+                            <p class="warning-badge">Email does not match</p>
+                            <p>The server share was accepted with a different Tailscale identity. No movie access was activated. Contact Aero to restart the invitation with the verified email.</p>
+                        </div>
+                    </section>
+
+                    <section class="account-card jellyfin-card">
+                        <p class="eyebrow">Step 3</p>
+                        <h3>Finish your movie profile</h3>
+                        <div id="jellyfin-waiting">
+                            <p>This step unlocks after the setup assistant confirms your approved device.</p>
+                        </div>
+                        <div id="jellyfin-pending" hidden>
+                            <p>Confirm your password once more. We will create a matching, playback-only Jellyfin login with the same username and password.</p>
+                            <form id="jellyfin-form" class="account-form compact-form">
+                                <label for="jellyfin-password">Confirm password</label>
+                                <input id="jellyfin-password" name="password" type="password" maxlength="128" autocomplete="current-password" required>
+                                <label class="show-password"><input type="checkbox" data-show-password="jellyfin-password"> Show password</label>
+                                <button type="submit">Set up movie access</button>
+                            </form>
+                        </div>
+                        <div id="jellyfin-ready" hidden>
+                            <p class="ready-badge">Movie profile ready</p>
+                            <p>Use the same username and password when Jellyfin asks you to sign in.</p>
+                            <a id="jellyfin-link" class="button-link movie-button" href="#" target="_blank" rel="noopener">Open Jellyfin <span aria-hidden="true">&rarr;</span></a>
+                        </div>
+                        <p class="permission-note">Approved movie libraries only: no server settings, media deletion, downloads, live-TV management, or control of other users.</p>
+                    </section>
+                </div>
+            </section>
+        </main>
+
+        <footer><p>&copy; 2026 Aero7Code. All rights reserved.</p></footer>
+    </div>
+
+    <script src="Script.js" defer></script>
+    <script src="Account.js" defer></script>
+</body>
+</html>
