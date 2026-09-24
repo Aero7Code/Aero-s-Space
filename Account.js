@@ -1,4 +1,4 @@
-const ACCOUNT_ENDPOINT = 'https://aerospace.taila128b4.ts.net:10001';
+const ACCOUNT_ENDPOINT = 'https://aerospace.taila128b4.ts.net:8443';
 const TOKEN_KEY = 'aerosspace-account-session';
 const DEVICE_KEY = 'aerosspace-browser-device';
 
