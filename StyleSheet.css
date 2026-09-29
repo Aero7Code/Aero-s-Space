@@ -478,6 +478,7 @@ footer {
     background: #153b60;
 }
 footer p { max-width: none; margin: 0; font-size: .86rem; }
+footer .text-link { display: inline-block; margin-bottom: .5rem; padding: .5rem; color: #fff; }
 
 :focus-visible { outline: 3px solid #e9a52b; outline-offset: 3px; }
 
